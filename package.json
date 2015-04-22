@@ -1,0 +1,29 @@
+{
+  "name": "WhereItsApp",
+  "version": "1.0.0",
+  "description": "Know whats happening.",
+  "main": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PatchworkGuilt/WhereItsApp.git"
+  },
+  "keywords": [
+    "Deals",
+    "Restaurants",
+    "Bars",
+    "Coupons",
+    "Sales"
+  ],
+  "author": "Scott Morse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PatchworkGuilt/WhereItsApp/issues"
+  },
+  "homepage": "https://github.com/PatchworkGuilt/WhereItsApp",
+  "dependencies": {
+    "casperjs": "^1.1.0-beta3"
+  }
+}
