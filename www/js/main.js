@@ -1,6 +1,6 @@
 $(function() {
     FastClick.attach(document.body);
-    $( "[data-role='header'], [data-role='footer']" ).toolbar();
+    /*$( "[data-role='header'], [data-role='footer']" ).toolbar();
 
     var OfferModel = Backbone.Model.extend({
     });
@@ -53,5 +53,5 @@ $(function() {
             case 'create':
                 break;
         }
-    });
+    });*/
 });
