@@ -9,16 +9,33 @@
         <script type='application/javascript' src='js/jquery-1.11.2.min.js'></script>
         <script type="application/javascript" src="js/jquery.mobile.custom.js"></script>
         <script type='application/javascript' src='js/fastclick.js'></script>
+        <script type='application/javascript' src='js/backbone-1.1.2.js'></script>
         <script type="text/javascript" src="cordova.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.custom.structure.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.custom.theme.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.min.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.min.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-svg-1.4.5.min.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-png-1.4.5.min.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.external-png-1.4.5.min.css">
         <title>WhereItsApp</title>
     </head>
     <body>
         <div data-role="page">
-            <div data-role="header">First App</div>
-            <div data-role="ui-content">Content</div>
-            <div data-role="footer">Footer</div>
+            <div id="page-header" data-role="header">
+                <h1>WhereItsApp</h1>
+            </div>
+            <div id="content" data-role="ui-content">
+                <div>Content</div>
+            </div>
+            <div id="page-footer" data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul class="ui-nodisc-icon ui-alt-icon">
+                        <li><a href="#" data-icon="home" class="ui-btn-active">Mine</a></li>
+                        <li><a href="#" data-icon="location">Nearby</a></li>
+                        <li><a href="#" data-icon="edit">Create</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </body>
 </html>
