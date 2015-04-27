@@ -17,12 +17,12 @@ $(function() {
         }
     });
     //CONTROLLER
-    nearbyOfferCollection = new OfferCollection([
+    var nearbyOfferCollection = new OfferCollection([
         new OfferModel({name: 'Offer 1'}),
         new OfferModel({name: 'Offer 2'})
     ]);
 
-    myOfferCollection = new OfferCollection([
+    var myOfferCollection = new OfferCollection([
         new OfferModel({name: 'Offer 1'}),
         new OfferModel({name: 'Offer 2'}),
         new OfferModel({name: 'Offer 3'})
