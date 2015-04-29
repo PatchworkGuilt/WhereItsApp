@@ -5,39 +5,56 @@ $(function() {
     var OfferModel = Backbone.Model.extend({
     });
 
-    var OfferCollection = Backbone.Collection.extend({
-        model: OfferModel
+    var NearbyOfferCollection = Backbone.Collection.extend({
+        model: OfferModel,
+        url: 'offers/nearby'
     });
 
-    var OfferView = Backbone.View.extend({
+    var MyOfferCollection = Backbone.Collection.extend({
+        model: OfferModel,
+        url: 'offers/mine'
+    });
+
+    $.mockjax({
+        url: 'offers/nearby',
+        responseText: [{name: 'Two for one drinks'}]
+    });
+    $.mockjax({
+        url: 'offers/mine',
+        responseText: [
+            new OfferModel({name: 'Offer 1'}),
+            new OfferModel({name: 'Offer 2'}),
+            new OfferModel({name: 'Offer 3'})
+        ]
+    });
+    var OfferListView = Backbone.View.extend({
+        initialize: function(options){
+            this.collection.on('add', this.render, this);
+            this.collection.fetch();
+        },
         render: function(){
             var template = Handlebars.compile($('#offer-list-template').html());
             this.$el.html(template({offers: this.collection.toJSON()}));
             this.$el.listview("refresh");
         }
     });
-    //CONTROLLER
-    var nearbyOfferCollection = new OfferCollection([
-        new OfferModel({name: 'Offer 1'}),
-        new OfferModel({name: 'Offer 2'})
-    ]);
 
-    var myOfferCollection = new OfferCollection([
-        new OfferModel({name: 'Offer 1'}),
-        new OfferModel({name: 'Offer 2'}),
-        new OfferModel({name: 'Offer 3'})
-    ]);
+    //CONTROLLER
+    var nearbyOfferCollection = new NearbyOfferCollection;
+
+    var myOfferCollection = new MyOfferCollection();
     var nearbyOfferListView;
     function showNearbyOffers() {
-        nearbyOfferListView = nearbyOfferListView || new OfferView({el: $('#offer-list'), collection: nearbyOfferCollection});
+        nearbyOfferListView = nearbyOfferListView || new OfferListView({el: $('#offer-list'), collection: nearbyOfferCollection});
         nearbyOfferListView.render();
     }
 
     var myOfferListView;
     function showMyOffers() {
-        myOfferListView = myOfferListView || new OfferView({el: $('#offer-list'), collection: myOfferCollection});
+        myOfferListView = myOfferListView || new OfferListView({el: $('#offer-list'), collection: myOfferCollection});
         myOfferListView.render();
     }
+
 
     showNearbyOffers();
 
