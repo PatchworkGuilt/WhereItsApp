@@ -35,6 +35,7 @@ casper.test.begin('Test phone/tablet layouts', function suite(test) {
             function then(){
                 test.assertVisible('#page-header', 'Page Header is visible - ' + viewportSize.name);
                 test.assertVisible('#page-footer', 'Page Footer is visible - ' + viewportSize.name);
+                test.assertVisible('#loading-gif', 'Showing loading spinner');
                 test.assertElementCount('.nav-link.ui-btn-active', 1, "Exactly one nav-link is active");
                 test.assertSelectorHasText('.nav-link.ui-btn-active', 'Mine', "'Mine' is first active link");
             }
@@ -43,6 +44,7 @@ casper.test.begin('Test phone/tablet layouts', function suite(test) {
         self.then(function check() {
             this.capture('www/test/images/index Nearby:' + viewportSize.name +'.png');
             test.assertExists('.offer-item', 'Has a nearby offer');
+            test.assertNotVisible('#loading-gif', 'Stopped showing loading spinner');
         });
         self.thenClick('.nav-link[data-action="nearby"]');
         casper.waitForSelector('li.offer-item');

@@ -1,3 +1,19 @@
 .ui-footer-fixed {
     padding-bottom: 0px;
 }
+
+.hide {
+    display: none;
+}
+
+#loading-gif {
+    position: fixed;
+    left: 50%;
+    margin-left: -16px; /* half width of the spinner gif */
+    margin-top: 15px;
+    text-align:center;
+    z-index:1234;
+    overflow: auto;
+    width: 31; /* width of the spinner gif */
+    height: 31px; /*height of the spinner gif +2px to fix IE8 issue */
+}
