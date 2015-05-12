@@ -48,9 +48,11 @@ $(function() {
         renderDetailPage: function(event){
             var itemId = $(event.target).data('id');
             var selectedItem = this.collection.findWhere({id: itemId});
-            $('#item-detail-venue').html(selectedItem.get('venue'));
-            $('#item-detail-title').html(selectedItem.get('title'));
-            $('#item-detail-description').html(selectedItem.get('description'));
+            var detailView = new ItemDetailView({model: selectedItem, el: $('#item-detail-container')});
+            detailView.render();
+            //$('#item-detail-venue').html(selectedItem.get('venue'));
+            //$('#item-detail-title').html(selectedItem.get('title'));
+            //$('#item-detail-description').html(selectedItem.get('description'));
             $.mobile.pageContainer.pagecontainer("change", "#item-detail-page", {transition:'slidefade'});
         },
         onFetchSuccess: function(data) {
@@ -65,6 +67,16 @@ $(function() {
             }));
             this.$('#item-list').listview().listview("refresh");
             this.$el.removeClass('hide');
+        }
+    });
+
+    var ItemDetailView = Backbone.View.extend({
+        initialize: function(){
+            this.template = Handlebars.compile($('#item-detail-template').html());
+        },
+        render: function() {
+            this.$el.html(this.template(this.model.toJSON()));
+            this.$("div[data-role='header']").toolbar();
         }
     });
 

@@ -45,16 +45,7 @@
             </div>
         </div>
         <div id="item-detail-page" data-role="page" data-transition="slide">
-            <div id="page-header" data-role="header">
-                <div id="item-detail-header" data-role="header">
-                    <a href="#" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-carat-l ui-nodisc-icon ui-alt-icon" data-rel="back">Back</a>
-                    <h1 id="item-detail-venue"></h1>
-                </div>
-                <div class="ui-body ui-body-a ui-corners-all">
-                    <h2 id="item-detail-title"></h2>
-                    <p id="item-detail-description"></p>
-                </div>
-            </div>
+            <div id="item-detail-container"></div>
         </div>
     </body>
 </html>
@@ -67,5 +58,16 @@
             </li>
         {{/each}}
     </ul>
+</script>
+
+<script id="item-detail-template" type="text/x-handlebars-template">
+    <div id="item-detail-header" data-role="header">
+        <a href="#" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-carat-l ui-nodisc-icon ui-alt-icon" data-rel="back">Back</a>
+        <h1 id="item-detail-venue">{{venue}}</h1>
+    </div>
+    <div class="ui-body ui-body-a ui-corners-all">
+        <h2 id="item-detail-title">{{title}}</h2>
+        <p id="item-detail-description">{{description}}</p>
+    </div>
 </script>
 
