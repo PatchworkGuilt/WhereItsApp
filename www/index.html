@@ -25,32 +25,47 @@
         <title>WhereItsApp</title>
     </head>
     <body>
-        <div data-role="page">
+        <div id="main-page" data-role="page">
             <div id="page-header" data-role="header">
                 <h1>WhereItsApp</h1>
             </div>
             <div id="content" data-role="ui-content">
                 <img id="loading-gif" class="hide" src="resources/loader.gif" alt="Loading"/>
-                <ul data-role="listview" id="offer-list">
-                </ul>
+                <div id="mine-item-list-container" class="list-container hide"></div>
+                <div id="nearby-item-list-container" class="list-container hide"></div>
             </div>
             <div id="page-footer" data-role="footer" data-position="fixed">
                 <div data-role="navbar">
                     <ul class="ui-nodisc-icon ui-alt-icon">
-                        <li><a href="#" class="nav-link ui-btn-active" data-action="mine" data-icon="home">Mine</a></li>
+                        <li><a href="#" class="nav-link ui-btn-active" data-action="mine" data-icon="heart">Mine</a></li>
                         <li><a href="#" class="nav-link" data-action="nearby" data-action="nearby" data-icon="location">Nearby</a></li>
                         <li><a href="#" class="nav-link" data-action="create" data-action="create" data-icon="edit">Create</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+        <div id="item-detail-page" data-role="page" data-transition="slide">
+            <div id="page-header" data-role="header">
+                <div id="item-detail-header" data-role="header">
+                    <a href="#" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-carat-l ui-nodisc-icon ui-alt-icon" data-rel="back">Back</a>
+                    <h1 id="item-detail-venue"></h1>
+                </div>
+                <div class="ui-body ui-body-a ui-corners-all">
+                    <h2 id="item-detail-title"></h2>
+                    <p id="item-detail-description"></p>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
 
-<script id="offer-list-template" type="text/x-handlebars-template">
-    {{#each offers}}
-        <li class="offer-item"><a href="#">{{ name }}</a></li>
-    {{/each}}
+<script id="list-template" type="text/x-handlebars-template">
+    <ul id="item-list" data-role="listview">
+        {{#each items}}
+            <li class="list-item">
+                <a href="#" class="list-item-title" data-id="{{this.id}}">{{ this.title }}</a>
+            </li>
+        {{/each}}
+    </ul>
 </script>
-
 

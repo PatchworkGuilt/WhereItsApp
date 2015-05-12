@@ -2,28 +2,28 @@ $(function() {
     FastClick.attach(document.body);
     $( "[data-role='header'], [data-role='footer']" ).toolbar();
 
-    var OfferModel = Backbone.Model.extend();
+    var ItemModel = Backbone.Model.extend();
 
-    var NearbyOfferCollection = Backbone.Collection.extend({
-        model: OfferModel,
+    var NearbyItemCollection = Backbone.Collection.extend({
+        model: ItemModel,
         url: 'offers/nearby'
     });
 
-    var MyOfferCollection = Backbone.Collection.extend({
-        model: OfferModel,
+    var MyItemCollection = Backbone.Collection.extend({
+        model: ItemModel,
         url: 'offers/mine'
     });
 
     $.mockjax({
         url: 'offers/nearby',
-        responseText: [{name: 'Two for one drinks'}]
+        responseText: [{id: 'abc123', description: 'If one is good then two is at least twice as good', venue: 'Shots on Rocks', title: "Two for one drinks"}]
     });
     $.mockjax({
         url: 'offers/mine',
         responseText: [
-            new OfferModel({name: 'Offer 1'}),
-            new OfferModel({name: 'Offer 2'}),
-            new OfferModel({name: 'Offer 3'})
+            new ItemModel({id: 'mine1', description: 'If one is good then two is at least twice as good', venue: 'Shots on Rocks', title: "Two for one drinks"}),
+            new ItemModel({id: 'mine2', description: "It's Rick.  Literally just show up.", venue: 'Megaladon', title: "10% off for people that know my name"}),
+            new ItemModel({id: 'mine3', description: 'If you could only see what our chef is cooking right now.', venue: 'The Duchess', title: "Free appetizer with purchase of a drink"})
         ]
     });
 
@@ -35,11 +35,23 @@ $(function() {
         $('#loading-gif').addClass('hide');
     }
 
-    var OfferListView = Backbone.View.extend({
+    var ItemListView = Backbone.View.extend({
         initialize: function(options){
+            this.template = Handlebars.compile($('#list-template').html());
             this.collection.on('add', this.render, this);
             showLoadingSpinner();
             this.collection.fetch({success: this.onFetchSuccess, failure: this.onFetchFailure});
+        },
+        events: {
+            "click .list-item a": "renderDetailPage"
+        },
+        renderDetailPage: function(event){
+            var itemId = $(event.target).data('id');
+            var selectedItem = this.collection.findWhere({id: itemId});
+            $('#item-detail-venue').html(selectedItem.get('venue'));
+            $('#item-detail-title').html(selectedItem.get('title'));
+            $('#item-detail-description').html(selectedItem.get('description'));
+            $.mobile.pageContainer.pagecontainer("change", "#item-detail-page", {transition:'slidefade'});
         },
         onFetchSuccess: function(data) {
             hideLoadingSpinner();
@@ -48,41 +60,57 @@ $(function() {
             hideLoadingSpinner();
         },
         render: function(){
-            var template = Handlebars.compile($('#offer-list-template').html());
-            this.$el.html(template({offers: this.collection.toJSON()}));
-            this.$el.listview("refresh");
+            this.$el.html(this.template({
+                items: this.collection.toJSON()
+            }));
+            this.$('#item-list').listview().listview("refresh");
+            this.$el.removeClass('hide');
         }
     });
 
     //CONTROLLER
-    var nearbyOfferCollection = new NearbyOfferCollection;
-    var myOfferCollection = new MyOfferCollection();
-    var nearbyOfferListView, myOfferListView;
+    var nearbyItemCollection = new NearbyItemCollection();
+    var myItemCollection = new MyItemCollection();
+    var nearbyItemListView, myItemListView, currentView;
+    var $activeLink;
 
-    function showNearbyOffers() {
-        nearbyOfferListView = nearbyOfferListView || new OfferListView({el: $('#offer-list'), collection: nearbyOfferCollection});
-        nearbyOfferListView.render();
+    function showNearbyItems() {
+        $(".list-container").addClass('hide');
+        nearbyItemListView = nearbyItemListView || new ItemListView({el: $('#nearby-item-list-container'), collection: nearbyItemCollection});
+        nearbyItemListView.render();
+        currentView = nearbyItemListView;
     }
 
-    function showMyOffers() {
-        myOfferListView = myOfferListView || new OfferListView({el: $('#offer-list'), collection: myOfferCollection});
-        myOfferListView.render();
+    function showMyItems() {
+        $(".list-container").addClass('hide');
+        myItemListView = myItemListView || new ItemListView({el: $('#mine-item-list-container'), collection: myItemCollection});
+        myItemListView.render();
+        currentView = myItemListView;
     }
 
-
-    showNearbyOffers();
+    showNearbyItems();
 
     $(".nav-link").click(function (e) {
         var action = $(this).data('action');
         switch(action) {
             case 'mine':
-                showNearbyOffers();
+                showNearbyItems();
                 break;
             case 'nearby':
-                showMyOffers();
+                showMyItems();
                 break;
             case 'create':
                 break;
         }
     });
+
+    $("a.nav-link").click(function(){
+        $activeLink = $(this);
+    });
+
+    $(document).on('pagebeforeshow', function(){
+        if ($activeLink) {
+            $activeLink.addClass($.mobile.activeBtnClass);
+        }
+    })
 });
