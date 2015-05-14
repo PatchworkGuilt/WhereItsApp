@@ -2,7 +2,11 @@ $(function() {
     FastClick.attach(document.body);
     $( "[data-role='header'], [data-role='footer']" ).toolbar();
 
-    var ItemModel = Backbone.Model.extend();
+    var ItemModel = Backbone.Model.extend({
+        save: function(){
+            //POST TO SERVER HERE
+        }
+    });
 
     var NearbyItemCollection = Backbone.Collection.extend({
         model: ItemModel,
@@ -70,6 +74,23 @@ $(function() {
     var CreationFormView = Backbone.View.extend({
         initialize: function() {
             this.template = Handlebars.compile($("#item-creation-template").html());
+        },
+        events: {
+            "keyup input,textarea": "onChange",
+            "paste input,textarea": "onChange",
+            "submit form": "onSubmit"
+        },
+        onSubmit: function() {
+            //TODO: VALIDATION
+            this.model.save();
+            this.$('form').trigger('reset');
+            return false;
+        },
+        onChange: function(e) {
+            var $input = $(e.target);
+            var key = $input.attr('name');
+            var newValue = $input.val();
+            this.model.set(key, newValue);
         },
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));

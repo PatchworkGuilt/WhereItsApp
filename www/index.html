@@ -68,15 +68,18 @@
         <ul class="med-spacing">
             <li>
                 <label for="venue-input">Venue:</label>
-                <input type="text" name="venue-input" id="venue-input" placeholder="e.g. Hometown Bar and Grill"/>
+                <input type="text" name="venue" id="venue-input" placeholder="e.g. Hometown Bar and Grill" value="{{venue}}"/>
             </li>
             <li>
                 <label for="title-input">Title:</label>
-                <input type="text" name="title-input" id="title-input" placeholder="e.g. Free drink with purchase of an appetizer"/>
+                <input type="text" name="title" id="title-input" placeholder="e.g. Free drink with purchase of an appetizer" value="{{title}}"/>
             </li>
             <li>
                 <label for="description-input">Description:</label>
-                <textarea id="description-input" name="description-input" placeholder="e.g. The coldest drinks and the warmest apps."></textarea>
+                <textarea name="description" id="description-input" name="description-input" placeholder="e.g. The coldest drinks and the warmest apps.">{{description}}</textarea>
+            </li>
+            <li>
+                <input id="submit-creation-button" class="ui-btn ui-shadow" data-theme="b" type="submit" value="Create"/>
             </li>
         </ul>
     </form>
