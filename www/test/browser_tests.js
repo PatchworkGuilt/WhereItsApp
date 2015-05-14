@@ -104,3 +104,19 @@ casper.test.begin("Test navigation to item detail page from 'Nearby'", function 
         test.done();
     });
 });
+
+casper.test.begin('Test navigation to item creation page', function (test) {
+    casper.start(config.filepath + "index.html");
+    casper.then(function(){
+        casper.waitForSelector("li.list-item a");
+    });
+    casper.thenClick('.nav-link[data-action="create"]');
+    casper.then(function(){
+        test.assertVisible('#venue-input', "Creation page has venue input");
+        test.assertVisible('#title-input', "Creation page has title input");
+        test.assertVisible('#description-input', "Creation page has description input");
+    })
+    casper.run(function() {
+        test.done();
+    });
+});
