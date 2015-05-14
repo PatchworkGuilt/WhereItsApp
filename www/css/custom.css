@@ -6,6 +6,30 @@
     display: none;
 }
 
+#page-header h1 {
+    font-family: 'Dosis', sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+ul.small-spacing li {
+    margin-bottom: 5px;
+}
+
+ul.med-spacing li {
+    margin-bottom: 15px;
+}
+
+ul.large-spacing li {
+    margin-bottom: 25px;
+}
+
+textarea, textarea.ui-input-text {
+    resize: none;
+}
+
 #loading-gif {
     position: fixed;
     left: 50%;
@@ -16,4 +40,8 @@
     overflow: auto;
     width: 8; /* width of the spinner gif */
     height: 11px; /*height of the spinner gif +2px to fix IE8 issue */
+}
+
+#item-creation-form {
+    margin: 15px;
 }

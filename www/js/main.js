@@ -50,9 +50,6 @@ $(function() {
             var selectedItem = this.collection.findWhere({id: itemId});
             var detailView = new ItemDetailView({model: selectedItem, el: $('#item-detail-container')});
             detailView.render();
-            //$('#item-detail-venue').html(selectedItem.get('venue'));
-            //$('#item-detail-title').html(selectedItem.get('title'));
-            //$('#item-detail-description').html(selectedItem.get('description'));
             $.mobile.pageContainer.pagecontainer("change", "#item-detail-page", {transition:'slidefade'});
         },
         onFetchSuccess: function(data) {
@@ -70,6 +67,17 @@ $(function() {
         }
     });
 
+    var CreationFormView = Backbone.View.extend({
+        initialize: function() {
+            this.template = Handlebars.compile($("#item-creation-template").html());
+        },
+        render: function() {
+            this.$el.html(this.template(this.model.toJSON()));
+            $("#content").trigger('create');
+            this.$el.removeClass('hide');
+        }
+    });
+
     var ItemDetailView = Backbone.View.extend({
         initialize: function(){
             this.template = Handlebars.compile($('#item-detail-template').html());
@@ -80,24 +88,29 @@ $(function() {
         }
     });
 
+
     //CONTROLLER
     var nearbyItemCollection = new NearbyItemCollection();
     var myItemCollection = new MyItemCollection();
-    var nearbyItemListView, myItemListView, currentView;
+    var nearbyItemListView, myItemListView, creationFormView;
     var $activeLink;
 
     function showNearbyItems() {
-        $(".list-container").addClass('hide');
+        $(".nav-page-container").addClass('hide');
         nearbyItemListView = nearbyItemListView || new ItemListView({el: $('#nearby-item-list-container'), collection: nearbyItemCollection});
         nearbyItemListView.render();
-        currentView = nearbyItemListView;
     }
 
     function showMyItems() {
-        $(".list-container").addClass('hide');
+        $(".nav-page-container").addClass('hide');
         myItemListView = myItemListView || new ItemListView({el: $('#mine-item-list-container'), collection: myItemCollection});
         myItemListView.render();
-        currentView = myItemListView;
+    }
+
+    function showCreationForm() {
+        $(".nav-page-container").addClass('hide');
+        creationFormView = creationFormView || new CreationFormView({el: $('#item-creation-container'), model: new ItemModel()});
+        creationFormView.render();
     }
 
     showNearbyItems();
@@ -112,6 +125,7 @@ $(function() {
                 showMyItems();
                 break;
             case 'create':
+                showCreationForm();
                 break;
         }
     });
