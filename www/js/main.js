@@ -49,16 +49,6 @@ $(function() {
         events: {
             "click .list-item a": "renderDetailPage"
         },
-        renderDetailPage: function(event){
-            var itemId = $(event.target).closest('a').data('id');
-            var selectedItem = this.collection.findWhere({id: itemId});
-            if (selectedItem) {
-                this.trigger("itemClicked", {item: selectedItem});
-                var detailView = new ItemDetailView({model: selectedItem, el: $('#item-detail-container')});
-                detailView.render();
-                $.mobile.pageContainer.pagecontainer("change", "#item-detail-page", {transition:'slidefade'});
-            }
-        },
         onFetchSuccess: function(data) {
             hideLoadingSpinner();
         },
@@ -120,21 +110,29 @@ $(function() {
     var $activeLink;
 
     function showItemDetailView(itemModel) {
-        var detailView = new ItemDetailView({model: selectedItem, el: $('#item-detail-container')});
+        var detailView = new ItemDetailView({model: itemModel, el: $('#item-detail-container')});
         detailView.render();
         $.mobile.pageContainer.pagecontainer("change", "#item-detail-page", {transition:'slidefade'});
     }
 
-    function showNearbyItems() {
+    function renderItemListView(view, $element, collection) {
         $(".nav-page-container").addClass('hide');
-        nearbyItemListView = nearbyItemListView || new ItemListView({el: $('#nearby-item-list-container'), collection: nearbyItemCollection});
-        nearbyItemListView.render();
+        if (!view) {
+            listView = new ItemListView({el: $element, collection: collection});
+            listView.on('itemClicked', function(itemModel){
+                showItemDetailView(itemModel);
+            });
+        }
+        listView.render();
+        return listView;
+    }
+
+    function showNearbyItems() {
+        nearbyItemListView = renderItemListView(nearbyItemListView, $('#nearby-item-list-container'), nearbyItemCollection);
     }
 
     function showMyItems() {
-        $(".nav-page-container").addClass('hide');
-        myItemListView = myItemListView || new ItemListView({el: $('#mine-item-list-container'), collection: myItemCollection});
-        myItemListView.render();
+        myItemListView = renderItemListView(myItemListView, $('#mine-item-list-container'), myItemCollection);
     }
 
     function showCreationForm() {
