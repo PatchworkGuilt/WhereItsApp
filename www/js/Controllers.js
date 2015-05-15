@@ -15,9 +15,9 @@ var MainController = function(){
             $.mobile.pageContainer.pagecontainer("change", "#item-detail-page", {transition:'slidefade'});
         }
 
-        function renderItemListView(view, $element, collection) {
+        function renderItemListView(listView, $element, collection) {
             $(".nav-page-container").addClass('hide');
-            if (!view) {
+            if (!listView) {
                 listView = new ItemListView({el: $element, collection: collection});
                 listView.on('itemClicked', function(itemModel){
                     showItemDetailView(itemModel);
@@ -41,16 +41,16 @@ var MainController = function(){
             creationFormView.render();
         }
 
-        showNearbyItems();
+        showMyItems();
 
         $(".nav-link").click(function (e) {
             var action = $(this).data('action');
             switch(action) {
                 case 'mine':
-                    showNearbyItems();
+                    showMyItems();
                     break;
                 case 'nearby':
-                    showMyItems();
+                    showNearbyItems();
                     break;
                 case 'create':
                     showCreationForm();
