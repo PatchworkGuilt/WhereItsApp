@@ -50,11 +50,14 @@ $(function() {
             "click .list-item a": "renderDetailPage"
         },
         renderDetailPage: function(event){
-            var itemId = $(event.target).data('id');
+            var itemId = $(event.target).closest('a').data('id');
             var selectedItem = this.collection.findWhere({id: itemId});
-            var detailView = new ItemDetailView({model: selectedItem, el: $('#item-detail-container')});
-            detailView.render();
-            $.mobile.pageContainer.pagecontainer("change", "#item-detail-page", {transition:'slidefade'});
+            if (selectedItem) {
+                this.trigger("itemClicked", {item: selectedItem});
+                var detailView = new ItemDetailView({model: selectedItem, el: $('#item-detail-container')});
+                detailView.render();
+                $.mobile.pageContainer.pagecontainer("change", "#item-detail-page", {transition:'slidefade'});
+            }
         },
         onFetchSuccess: function(data) {
             hideLoadingSpinner();
@@ -115,6 +118,12 @@ $(function() {
     var myItemCollection = new MyItemCollection();
     var nearbyItemListView, myItemListView, creationFormView;
     var $activeLink;
+
+    function showItemDetailView(itemModel) {
+        var detailView = new ItemDetailView({model: selectedItem, el: $('#item-detail-container')});
+        detailView.render();
+        $.mobile.pageContainer.pagecontainer("change", "#item-detail-page", {transition:'slidefade'});
+    }
 
     function showNearbyItems() {
         $(".nav-page-container").addClass('hide');

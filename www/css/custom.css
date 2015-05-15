@@ -27,6 +27,34 @@ ul.large-spacing li {
     margin-bottom: 25px;
 }
 
+.mam {
+    margin: 15px;
+}
+
+.mll {
+    margin-left: 25px;
+}
+
+.mrl {
+    margin-right: 25px;
+}
+
+.mls {
+    margin-left: 5px;
+}
+
+.mrs {
+    margin-right: 5px;
+}
+
+.mll {
+    margin-left: 25px;
+}
+
+.mrl {
+    margin-right: 25px;
+}
+
 textarea, textarea.ui-input-text {
     resize: none;
 }
@@ -45,4 +73,9 @@ textarea, textarea.ui-input-text {
 
 #item-creation-form {
     margin: 15px;
+}
+
+.list-item-image {
+    height: 50px;
+    width: 50px;
 }

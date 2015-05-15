@@ -57,7 +57,14 @@
     <ul id="item-list" data-role="listview">
         {{#each items}}
             <li class="list-item">
-                <a href="#" class="list-item-title" data-id="{{this.id}}">{{ this.title }}</a>
+                <a href="#" class="list-item-link" data-id="{{this.id}}">
+                    <img class="list-item-image mam" src="images/cocktail-icon.jpg"/>
+                    <h2 class="list-item-title">{{ this.title }}</h2>
+                    <p>
+                        <b class="list-item-venue">{{this.venue}}</b>
+                        <span class="list-item-time mll">Until 3pm</span><span class="mls list-item-time-left">(4 hrs left)</span>
+                    </p>
+                </a>
             </li>
         {{/each}}
     </ul>
