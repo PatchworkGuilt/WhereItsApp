@@ -28,31 +28,31 @@ ul.large-spacing li {
 }
 
 .mam {
-    margin: 15px;
+    margin: 15px !important;
 }
 
 .mll {
-    margin-left: 25px;
+    margin-left: 25px !important;
 }
 
 .mrl {
-    margin-right: 25px;
+    margin-right: 25px !important;
 }
 
 .mls {
-    margin-left: 5px;
+    margin-left: 5px !important;
 }
 
 .mrs {
-    margin-right: 5px;
+    margin-right: 5px !important;
 }
 
 .mll {
-    margin-left: 25px;
+    margin-left: 25px !important;
 }
 
 .mrl {
-    margin-right: 25px;
+    margin-right: 25px !important;
 }
 
 textarea, textarea.ui-input-text {

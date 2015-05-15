@@ -47,7 +47,8 @@ casper.test.begin('Test phone/tablet layouts', function suite(test) {
             test.assertNotVisible('#loading-gif', 'Stopped showing loading spinner');
         });
         self.thenClick('.nav-link[data-action="nearby"]');
-        casper.waitForSelector('li.list-item');
+        casper.waitWhileVisible('li.list-item');
+        casper.waitUntilVisible('li.list-item');
         self.then(function(){
             this.capture('www/test/images/index Mine:' + viewportSize.name +'.png');
             test.assertExists('.list-item', 'Has a Mine offer');
