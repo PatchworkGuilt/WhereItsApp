@@ -1,3 +1,4 @@
+//Workaround for CORS
 (function() {
   var proxiedSync = Backbone.sync;
 
@@ -13,7 +14,7 @@
 })();
 
 var ItemModel = Backbone.Model.extend({
-    url: 'http://0.0.0.0:5000/offers',
+    url: config.baseURL() + '/offers',
 
 });
 
@@ -22,11 +23,11 @@ var ItemCollection = Backbone.Collection.extend({
 });
 
 var NearbyItemCollection = ItemCollection.extend({
-    url: 'http://0.0.0.0:5000/offers/nearby'
+    url: config.baseURL() + '/offers/nearby'
 });
 
 var MyItemCollection = ItemCollection.extend({
-    url: 'http://0.0.0.0:5000/offers/mine'
+    url: config.baseURL() + '/offers/mine'
 });
 
 /*
