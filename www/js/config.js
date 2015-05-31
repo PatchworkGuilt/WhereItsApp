@@ -16,4 +16,4 @@ var prodConfig = new Config({
 	'url': 'http://whereitsapi-staging.heroku.com'
 });
 
-var config = stagingConfig;
+var config = localConfig;

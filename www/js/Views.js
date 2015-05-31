@@ -12,10 +12,13 @@ var ItemListView = Backbone.View.extend({
         this.template = Handlebars.compile($('#list-template').html());
         this.collection.on('add', this.render, this);
         showLoadingSpinner();
-        this.collection.fetch({success: this.onFetchSuccess, failure: this.onFetchFailure});
+        this.fetchItems();
     },
     events: {
         "click .list-item a": "itemClicked"
+    },
+    fetchItems: function(){
+        this.collection.fetch({success: this.onFetchSuccess, error: this.onFetchFailure});
     },
     itemClicked: function(event){
         var itemId = $(event.target).closest('a').data('id');
@@ -24,10 +27,11 @@ var ItemListView = Backbone.View.extend({
             this.trigger("itemClicked", selectedItem);
         }
     },
-    onFetchSuccess: function(data) {
+    onFetchSuccess: function(collection, response, options) {
         hideLoadingSpinner();
     },
-    onFetchFailure: function(data) {
+    onFetchFailure: function(collection, response, options) {
+        console.error(response)
         hideLoadingSpinner();
     },
     render: function(){
@@ -42,6 +46,9 @@ var ItemListView = Backbone.View.extend({
 var CreationFormView = Backbone.View.extend({
     initialize: function() {
         this.template = Handlebars.compile($("#item-creation-template").html());
+        if(! this.model.get('start-time')) {
+            this.model.set('start-time', new Date())
+        }
     },
     events: {
         "keyup input,textarea": "onChange",

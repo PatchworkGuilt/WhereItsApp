@@ -18,7 +18,6 @@
         <script type='application/javascript' src='js/Views.js'></script>
         <script type='application/javascript' src='js/Controllers.js'></script>
         <script type='application/javascript' src='js/main.js'></script>
-        <script type="text/javascript" src="cordova.js"></script>
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.min.css">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.min.css">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-svg-1.4.5.min.css">
@@ -31,8 +30,9 @@
     </head>
     <body>
         <div id="main-page" data-role="page">
-            <div id="page-header" data-role="header">
+            <div id="page-header" data-role="header" data-position="fixed">
                 <h1>WhereItsApp</h1>
+                <a href="#" class="sync-button ui-btn ui-btn-left ui-btn-icon-notext ui-corner-all ui-icon-refresh ui-nodisc-icon ui-alt-icon mll">Sync</a>
                 <a href="#" class="ui-btn ui-btn-right ui-btn-icon-notext ui-corner-all ui-icon-gear ui-nodisc-icon ui-alt-icon mrl">Gear</a>
             </div>
             <div id="content" data-role="ui-content">
@@ -90,6 +90,14 @@
                 <textarea name="description" id="description-input" name="description-input" placeholder="e.g. The coldest drinks and the warmest apps.">{{description}}</textarea>
             </li>
             <li>
+                <label for="start-time">Start Time:</label>
+                <input type="time" name="start-time" value="start-time" id="start-time"/>
+            </li>
+            <li>
+                <label for="end-time">End Time:</label>
+                <input type="time" name="end-time" value="end-time" id="end-time"/>
+            </li>
+            <li>
                 <input id="submit-creation-button" class="ui-btn ui-shadow" data-theme="b" type="submit" value="Create"/>
             </li>
         </ul>
@@ -101,9 +109,14 @@
         <a href="#" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-carat-l ui-nodisc-icon ui-alt-icon" data-rel="back">Back</a>
         <h1 id="item-detail-venue">{{venue}}</h1>
     </div>
-    <div class="ui-body ui-body-a ui-corners-all">
-        <h2 id="item-detail-title">{{title}}</h2>
-        <p id="item-detail-description">{{description}}</p>
+    <div class="item-details stackable-half-width">
+        <div class="ui-body ui-body-a ui-corners-all">
+            <h2 id="item-detail-title">{{title}}</h2>
+            <p id="item-detail-description">{{description}}</p>
+        </div>
+    </div>
+    <div class="item-photo stackable-half-width">
+        <img src="images/cocktail-icon.jpg" class="mal" height="100" width="100"/>
     </div>
 </script>
 

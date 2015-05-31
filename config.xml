@@ -1,12 +1,27 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="io.cordova.hellocordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>WhereItsApp</name>
     <description>
         Connecting you with where you want to be.
     </description>
-    <author>
+    <author email="scottgmorse@gmail.com">
         Scott Morse
     </author>
+    <content src="index.html" />
     <access origin="whereitsapi-staging.heroku.com" subdomains="true"/>
     <access origin="whereitsapi-prod.heroku.com" subdomains="true"/>
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <plugin name="cordova-plugin-whitelist" version="1" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
 </widget>

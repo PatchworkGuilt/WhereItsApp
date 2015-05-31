@@ -27,32 +27,52 @@ ul.large-spacing li {
     margin-bottom: 25px;
 }
 
-.mam {
-    margin: 15px !important;
+.mtl, .mal {
+    margin-top: 25px !important;
 }
 
-.mll {
+.mbl, .mal {
+    margin-bottom: 25px !important;
+}
+
+.mtm, .mam {
+    margin-top: 15px !important;
+}
+
+.mbm, .mam {
+    margin-bottom: 15px !important;
+}
+
+.mts, .mas {
+    margin-top: 5px !important;
+}
+
+.mbs, .mas {
+    margin-bottom: 5px !important;
+}
+
+.mll, .mal {
     margin-left: 25px !important;
 }
 
-.mrl {
+.mrl, .mal {
     margin-right: 25px !important;
 }
 
-.mls {
+.mls, .mas {
     margin-left: 5px !important;
 }
 
-.mrs {
+.mrs, .mas {
     margin-right: 5px !important;
 }
 
-.mll {
-    margin-left: 25px !important;
+.mlm, .mam {
+    margin-left: 15px !important;
 }
 
-.mrl {
-    margin-right: 25px !important;
+.mrm, .mam {
+    margin-right: 15px !important;
 }
 
 textarea, textarea.ui-input-text {
@@ -78,4 +98,16 @@ textarea, textarea.ui-input-text {
 .list-item-image {
     height: 50px;
     width: 50px;
+}
+
+.stackable-half-width {
+    width: 50%;
+    display: inline-block;
+    float: left;
+}
+
+@media (max-width: 400px) {
+    .stackable-half-width {
+        width: 100%;
+    }
 }

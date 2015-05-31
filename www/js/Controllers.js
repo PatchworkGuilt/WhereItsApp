@@ -62,6 +62,13 @@ var MainController = function(){
             $activeLink = $(this);
         });
 
+        $(".sync-button").click(function(){
+            if (nearbyItemListView)
+                nearbyItemListView.fetchItems();
+            if (myItemListView)
+                myItemListView.fetchItems();
+        });
+
         $(document).on('pagebeforeshow', function(){
             if ($activeLink) {
                 $activeLink.addClass($.mobile.activeBtnClass);
