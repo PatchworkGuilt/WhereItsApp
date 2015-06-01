@@ -6,8 +6,24 @@
     display: none;
 }
 
+#page-header {
+    height: 55px;
+}
+
 #page-header h1 {
     font-family: 'Dosis', sans-serif;
+    margin-top: 5px;
+}
+
+#page-header .ui-btn {
+    background-color: transparent;
+    border: none;
+    margin-top: 10px;
+}
+
+#page-header .ui-btn::after {
+    background-size: 95%;
+    border-radius: 0px;
 }
 
 ul {

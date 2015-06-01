@@ -30,10 +30,13 @@
     </head>
     <body>
         <div id="main-page" data-role="page">
-            <div id="page-header" data-role="header" data-position="fixed">
+            <div id="left-panel" data-role="panel" data-display="overlay" data-position-fixed="true">
+                <a href="#">A link</a>
+            </div>
+            <div id="page-header" data-role="header" data-position="fixed" class="ui-nodisc-icon">
                 <h1>WhereItsApp</h1>
-                <a href="#" class="sync-button ui-btn ui-btn-left ui-btn-icon-notext ui-corner-all ui-icon-refresh ui-nodisc-icon ui-alt-icon mll">Sync</a>
-                <a href="#" class="ui-btn ui-btn-right ui-btn-icon-notext ui-corner-all ui-icon-gear ui-nodisc-icon ui-alt-icon mrl">Gear</a>
+                <a href="#left-panel" class="ui-btn ui-btn-left ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon mll">Options</a>
+                <a href="#" class="sync-button ui-btn ui-btn-right ui-btn-icon-notext ui-corner-all ui-icon-refresh ui-nodisc-icon ui-alt-icon mrl">Sync</a>
             </div>
             <div id="content" data-role="ui-content">
                 <img id="loading-gif" class="hide" src="resources/loader.gif" alt="Loading"/>
