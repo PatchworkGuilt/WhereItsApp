@@ -9,11 +9,11 @@ var localConfig = new Config({
 });
 
 var stagingConfig = new Config({
-	'url': 'http://whereitsapi-staging.heroku.com'
+	'url': 'http://whereitsapi-staging.herokuapp.com'
 });
 
 var prodConfig = new Config({
-	'url': 'http://whereitsapi-staging.heroku.com'
+	'url': 'http://whereitsapi-prod.herokuapp.com'
 });
 
 var config = localConfig;

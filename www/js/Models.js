@@ -14,7 +14,7 @@
 })();
 
 var ItemModel = Backbone.Model.extend({
-    url: config.baseURL() + '/offers',
+    urlRoot: config.baseURL() + '/offers',
 
 });
 

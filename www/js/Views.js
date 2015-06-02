@@ -57,9 +57,14 @@ var CreationFormView = Backbone.View.extend({
     },
     onSubmit: function() {
         //TODO: VALIDATION
-        this.model.save();
-        this.$('form').trigger('reset');
+        this.model.save(null, {success: this.onSuccess, error: this.onError});
         return false;
+    },
+    onSuccess: function(model, response, options) {
+        this.$('form').trigger('reset');
+    },
+    onError: function(model, response, options) {
+        console.error(response);
     },
     onChange: function(e) {
         var $input = $(e.target);

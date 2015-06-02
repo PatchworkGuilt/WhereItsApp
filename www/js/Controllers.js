@@ -27,18 +27,30 @@ var MainController = function(){
             return listView;
         }
 
+        function makeNavLinkActive(action) {
+            $('.nav-link').removeClass($.mobile.activeBtnClass)
+            $('.nav-link[data-action="' + action + '"]').addClass($.mobile.activeBtnClass);
+        }
+
         function showNearbyItems() {
+            makeNavLinkActive('nearby');
             nearbyItemListView = renderItemListView(nearbyItemListView, $('#nearby-item-list-container'), nearbyItemCollection);
         }
 
         function showMyItems() {
+            makeNavLinkActive('mine');
             myItemListView = renderItemListView(myItemListView, $('#mine-item-list-container'), myItemCollection);
         }
 
         function showCreationForm() {
             $(".nav-page-container").addClass('hide');
-            creationFormView = creationFormView || new CreationFormView({el: $('#item-creation-container'), model: new ItemModel()});
+            newItem = new ItemModel();
+            creationFormView = creationFormView || new CreationFormView({el: $('#item-creation-container'), model: newItem});
             creationFormView.render();
+            newItem.on('sync', function(){
+                showMyItems();
+                myItemListView.fetchItems();
+            })
         }
 
         showMyItems();
@@ -59,7 +71,7 @@ var MainController = function(){
         });
 
         $("a.nav-link").click(function(){
-            $activeLink = $(this);
+            $activeLink = $(this).data('action');
         });
 
         $(".sync-button").click(function(){
@@ -71,7 +83,7 @@ var MainController = function(){
 
         $(document).on('pagebeforeshow', function(){
             if ($activeLink) {
-                $activeLink.addClass($.mobile.activeBtnClass);
+                makeNavLinkActive($activeLink);
             }
         })
     }
