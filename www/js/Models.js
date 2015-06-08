@@ -23,11 +23,15 @@ var ItemCollection = Backbone.Collection.extend({
 });
 
 var NearbyItemCollection = ItemCollection.extend({
-    url: config.baseURL() + '/offers/nearby'
+    url: function(){
+        return config.baseURL() + '/offers/nearby';
+    }
 });
 
 var MyItemCollection = ItemCollection.extend({
-    url: config.baseURL() + '/offers/mine'
+    url: function(){
+        return config.baseURL() + '/offers/mine';
+    }
 });
 
 /*

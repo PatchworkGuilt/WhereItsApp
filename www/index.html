@@ -25,15 +25,21 @@
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile.external-png-1.4.5.min.css">
         <link rel="stylesheet" type="text/css" href="css/custom.css">
-        <link href='fonts/google-dosis.font' rel='stylesheet' type='text/plain'>
+        <link href='fonts/google-dosis.font' type="text/font">
         <title>WhereItsApp</title>
     </head>
     <body>
         <div id="main-page" data-role="page">
             <div id="left-panel" data-role="panel" data-display="overlay" data-position-fixed="true">
-                <a href="#">A link</a>
+                <div class="page-header">
+                    <a href="#left-panel" rel="close" class="ui-btn ui-btn-left ui-btn-icon-notext ui-corner-all ui-icon-carat-l ui-nodisc-icon ui-alt-icon mll">Close</a>
+                </div>
+                <ul data-role="listview">
+                    <li data-icon="grid"><a href="#main-page">Offers</a></li>
+                    <li data-icon="gear"><a href="#my-account-page">My Account</a></li>
+                </ul>
             </div>
-            <div id="page-header" data-role="header" data-position="fixed" class="ui-nodisc-icon">
+            <div id="page-header" data-role="header" data-position="fixed" class="ui-nodisc-icon page-header">
                 <h1>WhereItsApp</h1>
                 <a href="#left-panel" class="ui-btn ui-btn-left ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon mll">Options</a>
                 <a href="#" class="sync-button ui-btn ui-btn-right ui-btn-icon-notext ui-corner-all ui-icon-refresh ui-nodisc-icon ui-alt-icon mrl">Sync</a>
@@ -56,6 +62,22 @@
         </div>
         <div id="item-detail-page" data-role="page" data-transition="slide">
             <div id="item-detail-container"></div>
+        </div>
+        <div id="my-account-page" data-role="page">
+            <div id="item-detail-header" data-role="header">
+                <a href="#" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-carat-l ui-nodisc-icon ui-alt-icon" data-rel="back">Back</a>
+                <h1>My Account</h1>
+            </div>
+
+            <fieldset id="environment-select" data-role="controlgroup" data-type="horizontal">
+                <legend>Select Environment (Staff only)</legend>
+                <input class="environment-option" type="radio" name="local" id="local" value="local">
+                <label for="local">Local</label>
+                <input class="environment-option" type="radio" name="staging" id="staging" value="staging">
+                <label for="staging">Staging</label>
+                <input class="environment-option" type="radio" name="prod" id="prod" value="prod">
+                <label for="prod">Prod</label>
+            </fieldset>
         </div>
     </body>
 </html>

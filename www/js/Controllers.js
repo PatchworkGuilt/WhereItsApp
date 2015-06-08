@@ -56,8 +56,8 @@ var MainController = function(){
         showMyItems();
 
         $(".nav-link").click(function (e) {
-            var action = $(this).data('action');
-            switch(action) {
+            var $activeLink = $(this).data('action');
+            switch($activeLink) {
                 case 'mine':
                     showMyItems();
                     break;
@@ -70,15 +70,28 @@ var MainController = function(){
             }
         });
 
-        $("a.nav-link").click(function(){
-            $activeLink = $(this).data('action');
-        });
-
         $(".sync-button").click(function(){
             if (nearbyItemListView)
                 nearbyItemListView.fetchItems();
             if (myItemListView)
                 myItemListView.fetchItems();
+        });
+
+        $("#environment-select input").click(function(event, other){
+            $('environment-option').removeAttr('selected');
+            environment = $(this).val();
+            switch(environment) {
+                case 'local':
+                    config = localConfig;
+                    break;
+                case 'staging':
+                    config = stagingConfig;
+                    break;
+                case 'prod':
+                    config = prodConfig;
+                    break;
+            }
+            $(this).attr('selected', 'selected')
         });
 
         $(document).on('pagebeforeshow', function(){
