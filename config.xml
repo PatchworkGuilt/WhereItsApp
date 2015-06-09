@@ -8,8 +8,8 @@
         Scott Morse
     </author>
     <content src="index.html" />
-    <access origin="whereitsapi-staging.heroku.com" subdomains="true"/>
-    <access origin="whereitsapi-prod.heroku.com" subdomains="true"/>
+    <access origin="whereitsapi-staging.heroku.com" subdomains="true" />
+    <access origin="whereitsapi-prod.heroku.com" subdomains="true" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -24,4 +24,5 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <engine name="ios" spec="^3.8.0" />
 </widget>
