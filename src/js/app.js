@@ -1,9 +1,11 @@
-angular.module('WhereItsApp', [
+app = angular.module('WhereItsApp', [
   'ngRoute',
   'mobile-angular-ui',
-  'WhereItsApp.controllers.Main'
-])
+  'WhereItsAppControllers'
+]);
 
-.config(function($routeProvider) {
-  $routeProvider.when('/', {templateUrl:'home.html',  reloadOnSearch: false});
+app.config(function($routeProvider) {
+  $routeProvider.when('/', {templateUrl:'home.html', controller: 'MainController'});
+  $routeProvider.when('/offers/:offerId', {templateUrl:'item-detail.html',  controller: 'OfferDetailController'});
+  $routeProvider.when('/create', {templateUrl:'item-create.html',  controller: 'OfferCreationController'});
 });
