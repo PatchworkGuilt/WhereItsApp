@@ -34,8 +34,8 @@
           </div>
         </div>
         <div class="btn-group pull-right" ui-yield-to="navbarAction">
-          <div ui-toggle="uiSidebarRight" class="btn">
-            <i class="fa fa-comment"></i> Chat
+          <div ng-click="config.toggleEnv()" class="btn">
+            <span class="{{config.getDisplayClass()}}">{{config.getEnvName()}}</span>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
       <!-- App Body -->
       
       <ng-view></ng-view>  
-      
+
 
     </div><!-- ~ .app -->
 
