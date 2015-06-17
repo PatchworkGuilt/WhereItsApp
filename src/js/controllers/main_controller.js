@@ -38,11 +38,11 @@ appControllers.controller("OfferDetailController", ['$scope', '$http', '$routePa
 	});
 }]);
 
-appControllers.controller("OfferCreationController", function($scope, $http){
+appControllers.controller("OfferCreationController", function($scope, $http, config){
 	$scope.newOffer = {};
 
 	$scope.onSubmit = function(){
-		$http.post('http://localhost:5000/offers', $scope.newOffer)
+		$http.post(config.getBaseUrl() + '/offers', $scope.newOffer)
 		.success(function(data){
 			$scope.message = "Offer successfully created.";
 			$scope.newOffer = {};

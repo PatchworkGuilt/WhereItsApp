@@ -1,9 +1,27 @@
+<div class="navbar navbar-absolute-bottom">
+	<div class="text-center">
+		<div class="btn-group dropup">
+			<button type="button" class="btn btn-danger dropdown-toggle" ng-click="showDropdown=!showDropdown" data-toggle="dropdown">
+				<i class="fa fa-ban"></i> 
+				Hate It <span class="caret">
+				<span class="sr-only">Toggle Dropdown</span>
+			</button>
+			<ul id="hate-it-options" class="dropdown-menu" ng-show="showDropdown">
+				<li><a class="text-danger">Block Venue Forever</a></li>
+				<li><a>Put Venue In Timeout</a></li>
+				<li><a>Report as Inappropriate</a></li>
+			</ul>
+		</div>
+		<button type="button" class="btn btn-warning"><i class="fa fa-close fa-navbar"></i> No Thanks</button>
+		<button type="button" class="btn btn-success acceptOffer"><i class="fa fa-check-circle fa-navbar"></i> Count Me In</button>
+	</div>
+</div>
 <div class="app-body">
     <div class="app-content">
     	<section class="section container-fluid">
-			<div>{{selectedOffer.title}}</div>
-			<div>{{selectedOffer.venue}}</div>
-			<div>{{selectedOffer.description}}</div>
+			<h4 class="center-block">{{selectedOffer.title}}</h4>
+			<i>{{selectedOffer.venue}}</i>
+			<p>{{selectedOffer.description}}</p>
 		</section>
 	</div>
 </div>
