@@ -13,6 +13,7 @@ var config = {
     js: [
       './bower_components/angular/angular.js',
       './bower_components/angular-route/angular-route.js',
+      './bower_components/angular-cookies/angular-cookies.js',
       './bower_components/mobile-angular-ui/dist/js/mobile-angular-ui.js'
     ],
 
