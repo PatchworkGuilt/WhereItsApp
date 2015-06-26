@@ -1,0 +1,16 @@
+<h1 class="app-name">WhereItsApp</h1>
+
+<div class="scrollable" ng-controller="SidebarController">
+  <h1 class="scrollable-header app-name">WhereItsApp</h1>  
+  <div class="scrollable-content">
+    <div class="list-group" ui-turn-off='uiSidebarLeft'>
+      <a class="list-group-item" href="#/mine">My Offers<i class="fa fa-glass pull-right"></i></a>
+      <a class="list-group-item" href="#/nearby">Public Offers<i class="fa fa-list pull-right"></i></a>
+      <a class="list-group-item" href="#/create">Create New<i class="fa fa-plus pull-right"></i></a>
+    </div>
+    <div class="list-group">
+    	<a class="list-group-item" ng-hide="userLoggedIn()" href="#/login">Login / Signup<i class="fa fa-user pull-right"></i></a>
+    	<a class="list-group-item" ng-show="userLoggedIn()" href="#/my-account">My Account<i class="fa fa-user pull-right"></i></a>
+    </div>
+  </div>
+</div>

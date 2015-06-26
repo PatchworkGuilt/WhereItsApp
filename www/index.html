@@ -1,147 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
-        <script type='application/javascript' src='js/third-party/jquery-1.11.2.min.js'></script>
-        <script type="application/javascript" src="js/third-party/jquery.mobile.custom.js"></script>
-        <script type='application/javascript' src='js/third-party/fastclick.js'></script>
-        <script type='application/javascript' src='js/third-party/underscore-1.8.3.js'></script>
-        <script type='application/javascript' src='js/third-party/backbone-1.1.2.js'></script>
-        <script type='application/javascript' src='js/third-party/handlebars-v3.0.1.js'></script>
-        <script type='application/javascript' src='js/third-party/jquery.mockjax.js'></script>
-        <script type='application/javascript' src='js/config.js'></script>
-        <script type='application/javascript' src='js/Models.js'></script>
-        <script type='application/javascript' src='js/Views.js'></script>
-        <script type='application/javascript' src='js/Controllers.js'></script>
-        <script type='application/javascript' src='js/main.js'></script>
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.min.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.min.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-svg-1.4.5.min.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-png-1.4.5.min.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.external-png-1.4.5.min.css">
-        <link rel="stylesheet" type="text/css" href="css/custom.css">
-        <link href='fonts/google-dosis.font' type="text/font">
-        <title>WhereItsApp</title>
-    </head>
-    <body>
-        <div id="main-page" data-role="page">
-            <div id="left-panel" data-role="panel" data-display="overlay" data-position-fixed="true">
-                <div class="page-header">
-                    <a href="#left-panel" rel="close" class="ui-btn ui-btn-left ui-btn-icon-notext ui-corner-all ui-icon-carat-l ui-nodisc-icon ui-alt-icon mll">Close</a>
-                </div>
-                <ul data-role="listview">
-                    <li data-icon="grid"><a href="#main-page">Offers</a></li>
-                    <li data-icon="gear"><a href="#my-account-page">My Account</a></li>
-                </ul>
-            </div>
-            <div id="page-header" data-role="header" data-position="fixed" class="ui-nodisc-icon page-header">
-                <h1>WhereItsApp</h1>
-                <a href="#left-panel" class="ui-btn ui-btn-left ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon mll">Options</a>
-                <a href="#" class="sync-button ui-btn ui-btn-right ui-btn-icon-notext ui-corner-all ui-icon-refresh ui-nodisc-icon ui-alt-icon mrl">Sync</a>
-            </div>
-            <div id="content" data-role="ui-content">
-                <img id="loading-gif" class="hide" src="resources/loader.gif" alt="Loading"/>
-                <div id="mine-item-list-container" class="nav-page-container hide"></div>
-                <div id="nearby-item-list-container" class="nav-page-container hide"></div>
-                <div id="item-creation-container" class="nav-page-container hide"></div>
-            </div>
-            <div id="page-footer" data-role="footer" data-position="fixed">
-                <div data-role="navbar">
-                    <ul class="ui-nodisc-icon ui-alt-icon">
-                        <li><a href="#" class="nav-link ui-btn-active" data-action="mine" data-icon="heart">Mine</a></li>
-                        <li><a href="#" class="nav-link" data-action="nearby" data-action="nearby" data-icon="location">Nearby</a></li>
-                        <li><a href="#" class="nav-link" data-action="create" data-action="create" data-icon="edit">Create</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div id="item-detail-page" data-role="page" data-transition="slide">
-            <div id="item-detail-container"></div>
-        </div>
-        <div id="my-account-page" data-role="page">
-            <div id="item-detail-header" data-role="header">
-                <a href="#" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-carat-l ui-nodisc-icon ui-alt-icon" data-rel="back">Back</a>
-                <h1>My Account</h1>
-            </div>
+  <head>
+    <meta charset="utf-8" />
+    <title>WhereItsApp</title>
 
-            <fieldset id="environment-select" data-role="controlgroup" data-type="horizontal">
-                <legend>Select Environment (Staff only)</legend>
-                <input class="environment-option" type="radio" name="local" id="local" value="local">
-                <label for="local">Local</label>
-                <input class="environment-option" type="radio" name="staging" id="staging" value="staging">
-                <label for="staging">Staging</label>
-                <input class="environment-option" type="radio" name="prod" id="prod" value="prod">
-                <label for="prod">Prod</label>
-            </fieldset>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+    <link rel="stylesheet" href="css/app.min.css" />
+    <link rel="stylesheet" href="css/responsive.min.css" />
+    <script src="http://localhost:8001/target/target-script-min.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/app.min.js"></script>
+  </head>
+  <body ng-app="WhereItsApp" ng-controller="MainController">
+
+    <!-- Sidebars -->
+    <div ng-include="'sidebar.html'" 
+            class="sidebar sidebar-left"></div>
+
+    <div class="app">
+
+      <!-- Navbars -->
+
+      <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
+          WhereItsApp
         </div>
-    </body>
+        <div class="btn-group pull-left">
+          <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
+            <i class="fa fa-bars"></i> Menu
+          </div>
+        </div>
+        <div class="btn-group pull-right" ui-yield-to="navbarAction">
+          <div ng-click="config.toggleEnv()" class="btn">
+            <span class="{{config.getDisplayClass()}}">{{config.getEnvName()}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- App Body -->
+      
+      <ng-view></ng-view>  
+
+
+    </div><!-- ~ .app -->
+
+    <div ui-yield-to="modals"></div>
+  </body>
 </html>
-
-<script id="list-template" type="text/x-handlebars-template">
-    <ul id="item-list" data-role="listview">
-        {{#each items}}
-            <li class="list-item">
-                <a href="#" class="list-item-link" data-id="{{this.id}}">
-                    <img class="list-item-image mam" src="images/cocktail-icon.jpg"/>
-                    <h2 class="list-item-title">{{ this.title }}</h2>
-                    <p>
-                        <b class="list-item-venue">{{this.venue}}</b>
-                        <span class="list-item-time mll">Until 3pm</span><span class="mls list-item-time-left">(4 hrs left)</span>
-                    </p>
-                </a>
-            </li>
-        {{/each}}
-    </ul>
-</script>
-
-<script id="item-creation-template" type="text/x-handlebars-template">
-    <form id="item-creation-form">
-        <ul class="med-spacing">
-            <li>
-                <label for="venue-input">Venue:</label>
-                <input type="text" name="venue" id="venue-input" placeholder="e.g. Hometown Bar and Grill" value="{{venue}}"/>
-            </li>
-            <li>
-                <label for="title-input">Title:</label>
-                <input type="text" name="title" id="title-input" placeholder="e.g. Free drink with purchase of an appetizer" value="{{title}}"/>
-            </li>
-            <li>
-                <label for="description-input">Description:</label>
-                <textarea name="description" id="description-input" name="description-input" placeholder="e.g. The coldest drinks and the warmest apps.">{{description}}</textarea>
-            </li>
-            <li>
-                <label for="start-time">Start Time:</label>
-                <input type="time" name="start-time" value="start-time" id="start-time"/>
-            </li>
-            <li>
-                <label for="end-time">End Time:</label>
-                <input type="time" name="end-time" value="end-time" id="end-time"/>
-            </li>
-            <li>
-                <input id="submit-creation-button" class="ui-btn ui-shadow" data-theme="b" type="submit" value="Create"/>
-            </li>
-        </ul>
-    </form>
-</script>
-
-<script id="item-detail-template" type="text/x-handlebars-template">
-    <div id="item-detail-header" data-role="header">
-        <a href="#" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-carat-l ui-nodisc-icon ui-alt-icon" data-rel="back">Back</a>
-        <h1 id="item-detail-venue">{{venue}}</h1>
-    </div>
-    <div class="item-details stackable-half-width">
-        <div class="ui-body ui-body-a ui-corners-all">
-            <h2 id="item-detail-title">{{title}}</h2>
-            <p id="item-detail-description">{{description}}</p>
-        </div>
-    </div>
-    <div class="item-photo stackable-half-width">
-        <img src="images/cocktail-icon.jpg" class="mal" height="100" width="100"/>
-    </div>
-</script>
-
