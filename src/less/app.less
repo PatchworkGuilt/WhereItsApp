@@ -15,7 +15,42 @@ ng-view {
 	background-color: #FF938D;
 }
 
-.acceptOffer {
-	padding-left: 30px;
-	padding-right: 30px;
+#loadingSpinner {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 999;
+	background-color: #ddd;
+	opacity: .5;
+
+	.loadingInner {
+		height: 64px;
+		width: 64px;
+		top: 50%;
+		left: 50%;	
+		opacity: 1;
+		margin-left: 32px;
+		margin-right: 32px;
+		position: absolute;
+	}
+
 }
+
+#offerResponseBar {
+	.acceptOffer {
+		padding-left: 45px;
+		padding-right: 45px;
+		border-color: green;
+		font-weight: bold;
+	}
+
+	.declineOffer {
+		padding-left: 20px;
+		padding-right: 20px;
+	}	
+
+	.hateOffer {
+		opacity: .5;
+	}
+}
+

@@ -45,13 +45,11 @@ appServices.factory('config', function(){
 appServices.factory('User', function($cookies, $rootScope){
 	var userCookieID = "WIAPPUser";
 	var loggedInUser = null;
-	console.log("LOOKING FOR COOKIE");
 	var user = $cookies.get(userCookieID);
 	if (user) {
 		loggedInUser = JSON.parse(user);
-		console.log(user);
 	}
-	
+
 	this.login = function(user) {
 		$cookies.put(userCookieID, JSON.stringify(user));
 		loggedInUser = user;
@@ -67,11 +65,13 @@ appServices.factory('User', function($cookies, $rootScope){
 	}
 
 	this.getUserDetails = function() {
-		var whitelist = ['first_name', 'last_name', 'email'];
 		var details = {};
-		for (var i=0; i<whitelist.length; i++) {
-			var item = whitelist[i];
-			details[item] = loggedInUser[item];
+		if (loggedInUser) {
+			var whitelist = ['first_name', 'last_name', 'email'];
+			for (var i=0; i<whitelist.length; i++) {
+				var item = whitelist[i];
+				details[item] = loggedInUser[item];
+			}
 		}
 		return details;
 	}
@@ -91,12 +91,16 @@ appServices.factory('RequestsCounter', function(){
 	var numActiveRequests = 0;
 	this.startRequest = function(thing) {
 		numActiveRequests++;
-		console.log("Requests: ", thing);
 	}
 
 	this.completeRequest = function(){
 		numActiveRequests--;
-		console.log("Requests: " + numActiveRequests);
+		if (numActiveRequests < 0)
+			numActiveRequests = 0;
+	}
+
+	this.hasPendingRequests = function(){
+		return numActiveRequests > 0;
 	}
 
 	return this;
