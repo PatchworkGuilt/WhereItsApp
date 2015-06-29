@@ -24,25 +24,31 @@
 
       <!-- Navbars -->
 
-      <div class="navbar navbar-app navbar-absolute-top">
-        <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
-          WhereItsApp
+        <div class="navbar navbar-app navbar-absolute-top">
+            <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
+              WhereItsApp
+            </div>
+            <div class="btn-group pull-left">
+              <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
+                <i class="fa fa-bars"></i> Menu
+              </div>
+            </div>
+            <div class="btn-group pull-right" ui-yield-to="navbarAction">
+              <div ng-click="config.toggleEnv()" class="btn">
+                <span class="{{config.getDisplayClass()}}">{{config.getEnvName()}}</span>
+              </div>
+            </div>
         </div>
-        <div class="btn-group pull-left">
-          <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
-            <i class="fa fa-bars"></i> Menu
-          </div>
-        </div>
-        <div class="btn-group pull-right" ui-yield-to="navbarAction">
-          <div ng-click="config.toggleEnv()" class="btn">
-            <span class="{{config.getDisplayClass()}}">{{config.getEnvName()}}</span>
-          </div>
-        </div>
-      </div>
 
-      <!-- App Body -->
-      
-      <ng-view></ng-view>  
+          <!-- App Body -->
+        <div ng-controller="LoadingSpinnerController">
+            <div id="loadingSpinner" ng-show="shouldShowSpinner()">
+                <div class="loadingInner">
+                   <img src="images/loading.gif">
+                </div>
+            </div>
+        </div>
+        <ng-view></ng-view>  
 
 
     </div><!-- ~ .app -->

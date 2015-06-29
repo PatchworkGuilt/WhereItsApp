@@ -120,7 +120,50 @@ appControllers.controller("UserController", function($scope, $http, config, User
 });
 
 appControllers.controller("SidebarController", function($scope, User){
-	$scope.userLoggedIn = User.isLoggedIn;
+	$scope.isUserLoggedIn = User.isLoggedIn;
+	$scope.user = User.getUserDetails()
 });
+
+appControllers.controller("OfferResponseController", function($scope, User){
+	$scope.isUserLoggedIn = User.isLoggedIn;
+	$scope.showDropdown = false;
+
+	$scope.toggleHatridDropdown = function(){
+		if($scope.showDropdown)
+			$scope.showDropdown = false;
+		else
+			$scope.showDropdown = true;
+	}
+	
+	$scope.acceptOffer = function() {
+		console.log("Offer Accepted");
+	}
+
+	$scope.declineOffer = function() {
+		console.log("Offer Declined");
+	}
+
+	$scope.hateOfferWithAction = function(action) {
+		switch(action) {
+			case "block":
+				console.log("Venue Blocked");
+				break;
+			case "timeout":
+				console.log("Venue in timeout");
+				break;
+			case "flag":
+				console.log("Reported as inappropriate");
+				break;
+		}
+		$scope.showDropdown = false;
+	}
+
+});
+
+appControllers.controller("LoadingSpinnerController", function($scope, RequestsCounter){
+	$scope.shouldShowSpinner = RequestsCounter.hasPendingRequests;
+});
+
+
 
 
