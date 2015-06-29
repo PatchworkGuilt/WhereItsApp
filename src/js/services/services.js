@@ -73,7 +73,7 @@ appServices.factory('User', function($cookies, $rootScope){
 				details[item] = loggedInUser[item];
 			}
 		}
-		return details;
+		return details; 
 	}
 
 	this.getAuthToken = function(){
