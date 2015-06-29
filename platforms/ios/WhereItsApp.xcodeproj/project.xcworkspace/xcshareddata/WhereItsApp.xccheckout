@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C9617472-60D3-4E41-A066-DCE8396E9998</string>
+	<key>IDESourceControlProjectName</key>
+	<string>WhereItsApp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0937E4C9C5FE13190B15C9EC53984AC632B84F62</key>
+		<string>github.com:PatchworkGuilt/WhereItsApp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>platforms/ios/WhereItsApp.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0937E4C9C5FE13190B15C9EC53984AC632B84F62</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:PatchworkGuilt/WhereItsApp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0937E4C9C5FE13190B15C9EC53984AC632B84F62</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0937E4C9C5FE13190B15C9EC53984AC632B84F62</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WhereItsApp</string>
+		</dict>
+	</array>
+</dict>
+</plist>
