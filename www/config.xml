@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:gap="http://phonegap.com/ns/1.0"
+        id="WhereItsApp"
+        versionCode="10" 
+        version="1.0.0" >
     <name>WhereItsApp</name>
     <description>
         Connecting you with where you want to be.
@@ -8,8 +12,7 @@
         Scott Morse
     </author>
     <content src="index.html" />
-    <access origin="whereitsapi-staging.heroku.com" subdomains="true" />
-    <access origin="whereitsapi-prod.heroku.com" subdomains="true" />
+    <access origin="*"/>
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
