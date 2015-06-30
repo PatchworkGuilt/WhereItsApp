@@ -164,6 +164,9 @@ gulp.task('html', function() {
   if (typeof config.weinre === 'object') {
     inject.push('<script src="http://'+config.weinre.boundHost+':'+config.weinre.httpPort+'/target/target-script-min.js"></script>');
   }
+  if (config.cordova) {
+    inject.push('<script src="cordova.js"></script>');
+  }
   gulp.src(['src/html/**/*.html'])
   .pipe(replace('<!-- inject:js -->', inject.join('\n    ')))
   .pipe(gulp.dest(config.dest));
