@@ -48,7 +48,7 @@ appControllers.controller("OfferCreationController", function($scope, $http, con
 			$scope.newOffer = {};
 		})
 		.error(function(data, status){
-			$scope.errorMessage = "Offer creation failed: " + data;
+			$scope.errorMessage = "Offer creation failed: " + data['message'];
 		});
 	};
 });

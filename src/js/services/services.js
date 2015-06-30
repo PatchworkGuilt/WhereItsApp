@@ -1,6 +1,6 @@
 var appServices = angular.module('WhereItsAppServices', []);
 
-appServices.factory('config', function(){
+appServices.factory('config', function($cookies){
 	var environments = [{
 		'name': 'Local',
 		'url': "http://localhost:5000",
@@ -17,7 +17,7 @@ appServices.factory('config', function(){
 		'displayClass': "text-danger"
 	}];
 
-	var ENV_INDEX = 0;
+	var ENV_INDEX = $cookies.get("WIAPPEnvIndex") || 0;
 
 	var getAttribute = function(attr){
 		return environments[ENV_INDEX][attr];
@@ -25,6 +25,7 @@ appServices.factory('config', function(){
 
 	this.toggleEnv = function(newEnv) {
 		ENV_INDEX = (ENV_INDEX + 1) % environments.length;
+		$cookies.put("WIAPPEnvIndex", ENV_INDEX);
 	}
 
 	this.getBaseUrl = function(){
@@ -42,21 +43,21 @@ appServices.factory('config', function(){
 	return this;
 });
 
-appServices.factory('User', function($cookies, $rootScope){
-	var userCookieID = "WIAPPUser";
+appServices.factory('User', function($cookies, $rootScope, config){
+	var userCookieID = function(){ return "WIAPPUser-" + config.getEnvName()};
 	var loggedInUser = null;
-	var user = $cookies.get(userCookieID);
+	var user = $cookies.get(userCookieID());
 	if (user) {
 		loggedInUser = JSON.parse(user);
 	}
 
 	this.login = function(user) {
-		$cookies.put(userCookieID, JSON.stringify(user));
+		$cookies.put(userCookieID(), JSON.stringify(user));
 		loggedInUser = user;
 	}
 
 	this.logout = function() {
-		$cookies.remove(userCookieID);
+		$cookies.remove(userCookieID());
 		loggedInUser = null;
 	}
 
