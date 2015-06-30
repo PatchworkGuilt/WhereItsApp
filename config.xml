@@ -12,8 +12,7 @@
         Scott Morse
     </author>
     <content src="index.html" />
-    <access origin="whereitsapi-staging.herokuapp.com" subdomains="true" />
-    <access origin="whereitsapi-prod.herokuapp.com" subdomains="true" />
+    <access origin="*"/>
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
