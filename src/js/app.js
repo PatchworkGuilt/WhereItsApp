@@ -20,4 +20,7 @@ app.config(function($routeProvider, $httpProvider) {
 
 app.run(function(User, $http){
 	$http.defaults.headers.common.Authorization = User.getAuthToken;
+	if(window.StatusBar) {
+		StatusBar.overlaysWebView(false);
+	}
 });
