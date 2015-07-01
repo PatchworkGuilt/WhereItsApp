@@ -23,6 +23,9 @@
     <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarStyle" value="default" />
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" onload="true" />
+    </feature>
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
