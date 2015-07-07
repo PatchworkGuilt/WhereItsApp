@@ -38,6 +38,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <gap:plugin name="org.apache.cordova.statusbar" />
+    <preference name="fullscreen" value="true" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarStyle" value="default" />
 </widget>
