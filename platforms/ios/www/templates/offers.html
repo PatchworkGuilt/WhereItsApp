@@ -1,0 +1,19 @@
+<div class="app-body">
+    <div class="app-content">
+		<section class="section container-fluid">
+			<div class="scrollable">
+				<div class="scrollable-content">
+					<div class="list-group">
+						<a class="list-group-item" href="{{'#/offers/' + offer.id}}" ng-repeat="offer in offers">
+					        <div class="btn pull-right">
+				            	<i class="fa fa-chevron-right"></i>
+					        </div>
+							<h4 class="list-group-item-heading">{{offer.title}}</h4>
+							<p class="list-group-item-text">{{offer.description}}</p>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
