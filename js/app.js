@@ -21,6 +21,10 @@ app.config(function($routeProvider, $httpProvider) {
 app.run(function(User, $http){
 	$http.defaults.headers.common.Authorization = User.getAuthToken;
 	if(window.StatusBar) {
+		alert("FOUND STATUSBAR");
 		StatusBar.overlaysWebView(false);
+	}
+	else {
+		alert("NO STATUSBAR");
 	}
 });
