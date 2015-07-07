@@ -19,17 +19,21 @@ ng-view {
 	background-color: #ddd;
 	opacity: .5;
 }
-#loadingSpinner .loadingInner {
-		height: 64px;
-		width: 64px;
-		top: 50%;
-		left: 50%;	
-		opacity: 1;
-		margin-left: 32px;
-		margin-right: 32px;
-		position: absolute;
-	}
 
+#loadingSpinner .loadingInner {
+	height: 64px;
+	width: 64px;
+	top: 50%;
+	left: 50%;	
+	opacity: 1;
+	margin-left: 32px;
+	margin-right: 32px;
+	position: absolute;
+}
+
+
+#offerResponseBar .btn {
+	margin: 5px;
 }
 
 #offerResponseBar .acceptOffer {
@@ -46,4 +50,8 @@ ng-view {
 
 #offerResponseBar .hateOffer {
 	opacity: .5;
+}
+
+.mainTitle {
+	font-family: 'Playfair Display', serif;
 }
