@@ -20,16 +20,17 @@ app.config(function($routeProvider, $httpProvider) {
 
 app.run(function(User, $http){
 	$http.defaults.headers.common.Authorization = User.getAuthToken;
-	document.addEventListener("deviceready", onDeviceReady, false);
-
-	function onDeviceReady() {
-	    // Now safe to use the Cordova API
-		if(StatusBar) {
-			alert("FOUND STATUSBAR");
-			StatusBar.overlaysWebView(false);
-		}
-		else {
-			alert("NO STATUSBAR");
-		}
-	}
 });
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+    // Now safe to use the Cordova API
+	if(StatusBar) {
+		alert("FOUND STATUSBAR");
+		StatusBar.overlaysWebView(false);
+	}
+	else {
+		alert("NO STATUSBAR");
+	}
+}
