@@ -1,0 +1,57 @@
+ng-view {
+	height: 100%;
+	background-color: white;
+}
+
+.app-name {
+	line-height: 50px;
+}
+
+#hate-it-options {
+	background-color: #FF938D;
+}
+
+#loadingSpinner {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 999;
+	background-color: #ddd;
+	opacity: .5;
+}
+
+#loadingSpinner .loadingInner {
+	height: 64px;
+	width: 64px;
+	top: 50%;
+	left: 50%;	
+	opacity: 1;
+	margin-left: 32px;
+	margin-right: 32px;
+	position: absolute;
+}
+
+
+#offerResponseBar .btn {
+	margin: 5px;
+}
+
+#offerResponseBar .acceptOffer {
+	padding-left: 45px;
+	padding-right: 45px;
+	border-color: green;
+	font-weight: bold;
+}
+
+#offerResponseBar .declineOffer {
+	padding-left: 20px;
+	padding-right: 20px;
+}	
+
+#offerResponseBar .hateOffer {
+	opacity: .5;
+}
+
+.mainTitle {
+	font-family: 'Playfair Display', serif;
+}

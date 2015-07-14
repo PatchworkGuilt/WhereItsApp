@@ -11,7 +11,6 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-plugin-whitelist": "1.0.0",
     "org.apache.cordova.statusbar": "0.1.10"
 }
 // BOTTOM OF METADATA
