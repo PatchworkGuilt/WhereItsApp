@@ -114,7 +114,8 @@ appControllers.controller("UserController", function($scope, $http, config, User
 			User.logout();
 		})
 		.error(function(data, status){
-			$scope.errorMessage = "User login failed: " + data;
+			$scope.errorMessage = "User logout failed: " + data;
+			User.logout();
 		})
 	}
 });
@@ -124,7 +125,7 @@ appControllers.controller("SidebarController", function($scope, User){
 	$scope.user = User.getUserDetails()
 });
 
-appControllers.controller("OfferResponseController", function($scope, User){
+appControllers.controller("OfferResponseController", function($scope, $http, $route, $routeParams, config, User){
 	$scope.isUserLoggedIn = User.isLoggedIn;
 	$scope.showDropdown = false;
 
@@ -134,30 +135,58 @@ appControllers.controller("OfferResponseController", function($scope, User){
 		else
 			$scope.showDropdown = true;
 	}
-	
-	$scope.acceptOffer = function() {
-		console.log("Offer Accepted");
-	}
 
-	$scope.declineOffer = function() {
-		console.log("Offer Declined");
-	}
-
-	$scope.hateOfferWithAction = function(action) {
-		switch(action) {
-			case "block":
-				console.log("Venue Blocked");
-				break;
-			case "timeout":
-				console.log("Venue in timeout");
-				break;
-			case "flag":
-				console.log("Reported as inappropriate");
-				break;
-		}
+	$scope.respondToOffer = function(response) {
+		postData = {'response': response};
 		$scope.showDropdown = false;
+		$http.post(config.getBaseUrl() + "/offers/" + $routeParams.offerId + "/response", postData)
+		.success(function(data){
+			$route.reload();
+		})
+		.error(function(data, status){
+			alert("Something went wrong.  We were unable to save your response");
+		});
 	}
 
+	$scope.responseDisplayClass = function(response) {
+		switch (response) {
+			case "ACCEPT":
+				return "bg-success"; break;
+			case "DECLINE":
+				return "bg-warning"; break;
+			default:
+				return "bg-danger";
+		}
+	}
+
+	var ResponseDisplayMap = {
+		'ACCEPT': {'fragment': 'success', 'icon': 'fa-check', 'text': "Great! You are going."},
+		'DECLINE': {'fragment': 'warning', 'icon': 'fa-close', 'text': "Sorry you can't make it."},
+		'DEFAULT': {'fragment': 'danger', 'icon': 'fa-ban', 'text': "You hate it. We'll let them know."}
+	}
+
+	function getDisplayByResponse(response) {
+		display = ResponseDisplayMap[response];
+		if (!display) {
+			display = ResponseDisplayMap['DEFAULT'];
+		}
+		return display;
+	}
+
+	$scope.responseDisplayClassFragment = function(response) {
+		display = getDisplayByResponse(response)
+		return display['fragment'];
+	}
+	
+	$scope.responseDisplayIconClass = function(response) {
+		display = getDisplayByResponse(response)
+		return display['icon'];
+	}
+
+	$scope.responseDisplayText = function(response) {
+		display = getDisplayByResponse(response)
+		return display['text'];
+	}
 });
 
 appControllers.controller("LoadingSpinnerController", function($scope, RequestsCounter){

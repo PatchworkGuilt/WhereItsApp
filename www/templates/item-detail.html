@@ -1,4 +1,14 @@
-<div class="navbar navbar-absolute-bottom" ng-include="'templates/item-response-bar.html'">
+<div class="navbar navbar-absolute-bottom">
+	<div ng-hide="selectedOffer.response" ng-include="'templates/item-response-bar.html'"></div>
+	<div ng-show="selectedOffer.response" class="text-center" ng-controller="OfferResponseController">
+		<p ng-class="'bg-' + responseDisplayClassFragment(selectedOffer.response)">
+			<i class="fa" ng-class="responseDisplayIconClass(selectedOffer.response)"></i>
+			{{responseDisplayText(selectedOffer.response)}}
+			<a class="small" ng-click="showChangeResponse = !showChangeResponse">{{showChangeResponse? "Cancel" : "Change"}}</a>
+		</p>
+		<div ng-show="showChangeResponse" ng-include="'templates/item-response-bar.html'"></div>
+	</div>
+</div>
 </div>
 <div class="app-body">
     <div class="app-content">
@@ -7,8 +17,10 @@
 			<hr />
 			<p class="lead">{{selectedOffer.description}}</p>
 			<hr />
-			<i>{{selectedOffer.venue}}</i>
-			<p>1422 Sycamore Dr. <bold> 4.2 Mi</bold></p> 
+			<address>
+				<strong>{{selectedOffer.venue}}</strong>
+				<p>1422 Sycamore Dr. <bold> 4.2 Mi</bold></p> 
+			</address>
 			<hr />
 		</section>
 	</div>

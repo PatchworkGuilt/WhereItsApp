@@ -10,6 +10,9 @@
 					        </div>
 							<h4 class="list-group-item-heading">{{offer.title}}</h4>
 							<p class="list-group-item-text">{{offer.description}}</p>
+							<span ng-show="offer.response" class="label" ng-class="'label-' + responseDisplayClassFragment(offer.response)" ng-controller="OfferResponseController">
+								<i class="fa" ng-class="responseDisplayIconClass(offer.response)"></i>
+							</span>
 						</a>
 					</div>
 				</div>
