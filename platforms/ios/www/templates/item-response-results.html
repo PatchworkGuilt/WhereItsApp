@@ -1,0 +1,8 @@
+<div class="text-center" ng-controller="OfferResponseController">
+	<p ng-class="'bg-' + responseDisplayClassFragment(selectedOffer.response)">
+		<i class="fa" ng-class="responseDisplayIconClass(selectedOffer.response)"></i>
+		{{responseDisplayText(selectedOffer.response)}}
+		<a class="small" ng-click="showChangeResponse = !showChangeResponse">{{showChangeResponse? "Cancel" : "Change"}}</a>
+	</p>
+	<div ng-show="showChangeResponse" ng-include="'templates/item-response-bar.html'"></div>
+</div>

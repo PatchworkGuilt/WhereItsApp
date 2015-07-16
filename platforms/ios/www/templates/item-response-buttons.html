@@ -1,0 +1,19 @@
+<div class="text-center" ng-show="isUserLoggedIn()">
+	<div class="btn-group dropup">
+		<button type="button" class="btn btn-danger dropdown-toggle hateOffer" ng-click="toggleHatridDropdown()" data-toggle="dropdown">
+			<i class="fa fa-ban"></i> 
+			Hate It <span class="caret">
+			<span class="sr-only">Toggle Dropdown</span>
+		</button>
+		<ul id="hate-it-options" class="dropdown-menu" ng-show="showDropdown">
+			<li><a ng-click="respondToOffer('hate:block')">Block Venue Forever</a></li>
+			<li><a ng-click="respondToOffer('hate:timeout')">Put Venue In Timeout</a></li>
+			<li><a ng-click="respondToOffer('hate:inappropriate')">Report as Inappropriate</a></li>
+		</ul>
+	</div>
+	<button type="button" ng-click="respondToOffer('decline')" class="btn btn-warning declineOffer"><i class="fa fa-close fa-navbar"></i> No Thanks</button>
+	<button type="button" ng-click="respondToOffer('accept')" class="btn btn-success acceptOffer"><i class="fa fa-check-circle fa-navbar"></i> Count Me In</button>
+</div>
+<div class="text-center" ng-hide="isUserLoggedIn()">
+	<a href="#/login" type="button" class="btn btn-info"><b>Log In</b> To Claim This Offer</a>
+</div>
