@@ -1,12 +1,13 @@
 app = angular.module('WhereItsApp', [
   'ngRoute',
   'ngCookies',
+  'ngModal',
   'mobile-angular-ui',
   'WhereItsAppControllers',
   'WhereItsAppServices'
 ]);
 
-app.config(function($routeProvider, $httpProvider) {
+app.config(function($routeProvider, $httpProvider, ngModalDefaultsProvider) {
 	$routeProvider.when('/', {redirectTo: "/mine"});
 	$routeProvider.when('/login', {templateUrl:'templates/login-signup.html', controller: 'UserController'});
 	$routeProvider.when('/my-account', {templateUrl:'templates/account.html', controller: 'UserController'});
@@ -16,6 +17,8 @@ app.config(function($routeProvider, $httpProvider) {
 	$routeProvider.when('/create', {templateUrl:'templates/item-create.html',  controller: 'OfferCreationController'});
 
 	$httpProvider.interceptors.push('appHttpInterceptor');
+
+	ngModalDefaultsProvider.set('closeButtonHtml', '<i class="fa fa-times"></i>')
 });
 
 app.run(function(User, $http){
