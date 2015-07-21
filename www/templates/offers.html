@@ -4,15 +4,26 @@
 			<div class="scrollable">
 				<div class="scrollable-content">
 					<div class="list-group">
-						<a class="list-group-item" href="{{'#/offers/' + offer.id}}" ng-repeat="offer in offers">
-					        <div class="btn pull-right">
-				            	<i class="fa fa-chevron-right"></i>
+						<a class="offer-item list-group-item" href="{{'#/offers/' + offer.id}}" ng-repeat="offer in offers">
+							<h4>{{offer.title}}</h4>
+							<hr />
+							<div class="row">
+						        <div class="col-xs-8">
+									<address>
+										<strong>{{offer.venue}}</strong><br />
+										1423 46th ave S.
+									</address>
+								</div>
+						        <h4 class="col-xs-4 text-center ">
+						        	<span class="label label-info label-as-badge">
+										<i class="fa fa-map-marker"></i> 4.2 mi
+									</span>
+									<br />
+									<span ng-show="offer.response" class="label" ng-class="'label-' + responseDisplayClassFragment(offer.response)" ng-controller="OfferResponseController">
+										<i class="fa" ng-class="responseDisplayIconClass(offer.response)"></i>
+									</span>
+						        </h4>
 					        </div>
-							<h4 class="list-group-item-heading">{{offer.title}}</h4>
-							<p class="list-group-item-text">{{offer.description}}</p>
-							<span ng-show="offer.response" class="label" ng-class="'label-' + responseDisplayClassFragment(offer.response)" ng-controller="OfferResponseController">
-								<i class="fa" ng-class="responseDisplayIconClass(offer.response)"></i>
-							</span>
 						</a>
 					</div>
 				</div>

@@ -79,3 +79,24 @@ ng-view {
 	text-align: center;
 	padding: 50px;
 }
+
+address {
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+.label-as-badge {
+	border-radius: 1em;
+	display: inline-block;
+	margin: 5px;
+}
+
+a.offer-item {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-bottom-width: 5px;
+}
+
+hr {
+	margin: 10px;
+}
