@@ -134,3 +134,51 @@ appServices.factory('appHttpInterceptor', function($q, User, RequestsCounter){
 	    }
 	  };
 });
+
+appServices.factory('NavBarService', function(){
+	var ButtonTypes = {
+		BACK: "BACK",
+		MENU: "MENU"
+	};
+	var defaultState = {
+		button: ButtonTypes.MENU,
+		text: "WhereItsApp"
+	};
+
+	var currentState;
+
+	return {
+		ButtonTypes: ButtonTypes, 
+
+		setState: function(text, button) {
+			if (text != undefined && button) {
+				currentState = {
+					button: button,
+					text: text
+				}
+			} else {
+				console.error("Attempting to set bad NavBar state: ", text, button);
+			}
+		},
+
+		setStateToDefault: function() {
+			currentState = null;
+		},
+
+		getButtonType: function() {
+			if (currentState) {
+				return currentState.button;
+			} else {
+				return defaultState.button;
+			}
+		},
+
+		getText: function() {
+			if (currentState) {
+				return currentState.text;
+			} else {
+				return defaultState.text;
+			}
+		}
+	}
+});

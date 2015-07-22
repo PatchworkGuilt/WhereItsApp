@@ -4,15 +4,29 @@ appControllers.controller('MainController', ['$scope', 'config', function($scope
 	$scope.config = config;
 }]);
 
+appControllers.controller("NavigationBarController", function($scope){
+	$scope.mainBarText = "WhereItsApp";
+
+	$scope.buttonType = "menu";
+
+	$scope.goBack = function() {
+		$scope.buttonType = "menu";
+		window.history.back();
+	};
+});
+
 appControllers.controller('MyOffersController', ['$scope', '$http', 'config', function($scope, $http, config){
-	$scope.offers = []
-	$http.get(config.getBaseUrl() + "/offers/mine")
-	.success(function(data) {
-		$scope.offers = data;
-	})
-	.error(function(data, status, headers, config){
-		console.error(data);
-	});
+	$scope.offers = [];
+	$scope.getOffers = function() {
+		$http.get(config.getBaseUrl() + "/offers/mine")
+		.success(function(data) {
+			$scope.offers = data;
+		})
+		.error(function(data, status, headers, config){
+			console.error(data);
+		});
+	}
+	$scope.getOffers();	
 }]);
 
 appControllers.controller('NearbyOffersController', ['$scope', '$http', 'config', function($scope, $http, config){
@@ -26,8 +40,9 @@ appControllers.controller('NearbyOffersController', ['$scope', '$http', 'config'
 	});
 }]);
 
-appControllers.controller("OfferDetailController", ['$scope', '$http', '$routeParams', 'config', function($scope, $http, $routeParams, config){
+appControllers.controller("OfferDetailController", function($scope, $http, $routeParams, $rootScope, config){
 	//$GET offer details from backend
+	$rootScope.navbarBack = true;
 	var offerId = $routeParams.offerId;
 	$http.get(config.getBaseUrl() + '/offers/' + offerId)
 	.success(function(data) {
@@ -36,7 +51,7 @@ appControllers.controller("OfferDetailController", ['$scope', '$http', '$routePa
 	.error(function(data, status){
 		console.error(data);
 	});
-}]);
+});
 
 appControllers.controller("OfferCreationController", function($scope, $http, config){
 	$scope.newOffer = {};

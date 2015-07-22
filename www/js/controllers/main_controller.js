@@ -4,30 +4,51 @@ appControllers.controller('MainController', ['$scope', 'config', function($scope
 	$scope.config = config;
 }]);
 
+appControllers.controller("NavigationBarController", function($scope, NavBarService){
+	$scope.getBarText = NavBarService.getText;
+	$scope.getButtonType = NavBarService.getButtonType;
+
+	$scope.goBack = function() {
+		NavBarService.setStateToDefault();
+		window.history.back();
+	};
+});
+
 appControllers.controller('MyOffersController', ['$scope', '$http', 'config', function($scope, $http, config){
-	$scope.offers = []
-	$http.get(config.getBaseUrl() + "/offers/mine")
-	.success(function(data) {
-		$scope.offers = data;
-	})
-	.error(function(data, status, headers, config){
-		console.error(data);
-	});
+	$scope.offers = $scope.offers || [];
+	$scope.getOffers = function() {
+		$http.get(config.getBaseUrl() + "/offers/mine")
+		.success(function(data) {
+			$scope.offers = data;
+		})
+		.error(function(data, status, headers, config){
+			console.error(data);
+		});
+	};
+	if (!$scope.offers.length) {
+		$scope.getOffers();	
+	}
 }]);
 
 appControllers.controller('NearbyOffersController', ['$scope', '$http', 'config', function($scope, $http, config){
-	$scope.offers = []
-	$http.get(config.getBaseUrl() + "/offers/nearby")
-	.success(function(data) {
-		$scope.offers = data;
-	})
-	.error(function(data, status, headers, config){
-		console.error(data);
-	});
+	$scope.offers = $scope.offers || []
+	$scope.getOffers = function() {
+		$http.get(config.getBaseUrl() + "/offers/nearby")
+		.success(function(data) {
+			$scope.offers = data;
+		})
+		.error(function(data, status, headers, config){
+			console.error(data);
+		});
+	};
+	if (!$scope.offers.length) {
+		$scope.getOffers();	
+	}
 }]);
 
-appControllers.controller("OfferDetailController", ['$scope', '$http', '$routeParams', 'config', function($scope, $http, $routeParams, config){
+appControllers.controller("OfferDetailController", function($scope, $http, $routeParams, NavBarService, config){
 	//$GET offer details from backend
+	NavBarService.setState("", NavBarService.ButtonTypes.BACK);
 	var offerId = $routeParams.offerId;
 	$http.get(config.getBaseUrl() + '/offers/' + offerId)
 	.success(function(data) {
@@ -36,7 +57,7 @@ appControllers.controller("OfferDetailController", ['$scope', '$http', '$routePa
 	.error(function(data, status){
 		console.error(data);
 	});
-}]);
+});
 
 appControllers.controller("OfferCreationController", function($scope, $http, config){
 	$scope.newOffer = {};
