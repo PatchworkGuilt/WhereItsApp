@@ -104,3 +104,16 @@ hr {
 .directionsButton {
 	margin: 10px;
 }
+
+.my-panel {
+	margin-top: 10px;
+}
+
+.my-panel .panel-heading {
+	padding: 5px;
+	background-color: white;
+}
+
+.my-panel .panel-heading .panel-title {
+	font-size: 14px;
+}

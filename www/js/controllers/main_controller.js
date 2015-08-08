@@ -61,7 +61,7 @@ appControllers.controller("OfferDetailController", function($scope, $http, $rout
 
 appControllers.controller("OfferCreationController", function($scope, $http, config){
 	$scope.newOffer = {};
-
+	
 	$scope.onSubmit = function(){
 		$http.post(config.getBaseUrl() + '/offers', $scope.newOffer)
 		.success(function(data){

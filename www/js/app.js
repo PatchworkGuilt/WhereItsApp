@@ -13,8 +13,8 @@ app.config(function($routeProvider, $httpProvider, ngModalDefaultsProvider) {
 	$routeProvider.when('/my-account', {templateUrl:'templates/account.html', controller: 'UserController'});
 	$routeProvider.when('/mine', {templateUrl:'templates/offers.html', controller: 'MyOffersController'});
 	$routeProvider.when('/nearby', {templateUrl:'templates/offers.html',  controller: 'NearbyOffersController'});
-	$routeProvider.when('/offers/:offerId', {templateUrl:'templates/item-detail.html',  controller: 'OfferDetailController'});
-	$routeProvider.when('/create', {templateUrl:'templates/item-create.html',  controller: 'OfferCreationController'});
+	$routeProvider.when('/offers/:offerId', {templateUrl:'templates/offer-detail.html',  controller: 'OfferDetailController'});
+	$routeProvider.when('/create', {templateUrl:'templates/offer-create.html',  controller: 'OfferCreationController'});
 
 	$httpProvider.interceptors.push('appHttpInterceptor');
 
