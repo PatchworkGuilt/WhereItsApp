@@ -1,8 +1,8 @@
 appControllers = angular.module('WhereItsAppControllers', []);
 
-appControllers.controller('MainController', ['$scope', 'config', function($scope, config){
+appControllers.controller('MainController', function($scope, config){
 	$scope.config = config;
-}]);
+});
 
 appControllers.controller("NavigationBarController", function($scope, NavBarService){
 	$scope.getBarText = NavBarService.getText;
@@ -14,7 +14,8 @@ appControllers.controller("NavigationBarController", function($scope, NavBarServ
 	};
 });
 
-appControllers.controller('MyOffersController', ['$scope', '$http', 'config', function($scope, $http, config){
+appControllers.controller('MyOffersController', function($scope, $http, NavBarService, config){
+	NavBarService.setState("My Offers", NavBarService.ButtonTypes.MENU);
 	$scope.offers = $scope.offers || [];
 	$scope.getOffers = function() {
 		$http.get(config.getBaseUrl() + "/offers/mine")
@@ -28,9 +29,10 @@ appControllers.controller('MyOffersController', ['$scope', '$http', 'config', fu
 	if (!$scope.offers.length) {
 		$scope.getOffers();	
 	}
-}]);
+});
 
-appControllers.controller('NearbyOffersController', ['$scope', '$http', 'config', function($scope, $http, config){
+appControllers.controller('NearbyOffersController', function($scope, $http, NavBarService, config){
+	NavBarService.setState("Public Offers", NavBarService.ButtonTypes.MENU);
 	$scope.offers = $scope.offers || []
 	$scope.getOffers = function() {
 		$http.get(config.getBaseUrl() + "/offers/nearby")
@@ -44,10 +46,9 @@ appControllers.controller('NearbyOffersController', ['$scope', '$http', 'config'
 	if (!$scope.offers.length) {
 		$scope.getOffers();	
 	}
-}]);
+});
 
 appControllers.controller("OfferDetailController", function($scope, $http, $routeParams, NavBarService, config){
-	//$GET offer details from backend
 	NavBarService.setState("", NavBarService.ButtonTypes.BACK);
 	var offerId = $routeParams.offerId;
 	$http.get(config.getBaseUrl() + '/offers/' + offerId)
@@ -59,9 +60,10 @@ appControllers.controller("OfferDetailController", function($scope, $http, $rout
 	});
 });
 
-appControllers.controller("OfferCreationController", function($scope, $http, config){
+appControllers.controller("OfferCreationController", function($scope, $http, NavBarService, config){
+	NavBarService.setState("Create New", NavBarService.ButtonTypes.MENU);
 	$scope.newOffer = {};
-	
+
 	$scope.onSubmit = function(){
 		$http.post(config.getBaseUrl() + '/offers', $scope.newOffer)
 		.success(function(data){
@@ -74,7 +76,8 @@ appControllers.controller("OfferCreationController", function($scope, $http, con
 	};
 });
 
-appControllers.controller("UserController", function($scope, $http, config, User){
+appControllers.controller("UserController", function($scope, $http, config, NavBarService, User){
+	NavBarService.setState("", NavBarService.ButtonTypes.MENU);
 	$scope.User = {};
 	$scope.newUser = {};
 

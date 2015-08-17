@@ -3,8 +3,8 @@ app = angular.module('WhereItsApp', [
   'ngCookies',
   'ngModal',
   'mobile-angular-ui',
-  'WhereItsAppControllers',
-  'WhereItsAppServices'
+  'WhereItsAppServices',
+  'WhereItsAppControllers'
 ]);
 
 app.config(function($routeProvider, $httpProvider, ngModalDefaultsProvider) {

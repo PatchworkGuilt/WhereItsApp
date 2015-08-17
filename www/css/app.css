@@ -107,13 +107,30 @@ hr {
 
 .my-panel {
 	margin-top: 10px;
+	border-color: #cccccc;
 }
 
 .my-panel .panel-heading {
 	padding: 5px;
 	background-color: white;
+	border-color: inherit;
 }
 
 .my-panel .panel-heading .panel-title {
 	font-size: 14px;
+}
+
+.my-label {
+	border-bottom: 1px solid;
+	border-radius: 0;
+	padding: .4em .6em;
+	font-size: 14px;
+}
+
+.my-label-primary {
+	color: #007aff;
+}
+
+.my-label-success {
+	color: #4cd964;
 }
