@@ -60,15 +60,15 @@ appControllers.controller("OfferDetailController", function($scope, $http, $rout
 	});
 });
 
-appControllers.controller("OfferCreationController", function($scope, $http, NavBarService, config){
+appControllers.controller("OfferCreationController", function($scope, $http, $location, NavBarService, config){
 	NavBarService.setState("Create New", NavBarService.ButtonTypes.MENU);
 	$scope.newOffer = {};
 
 	$scope.onSubmit = function(){
 		$http.post(config.getBaseUrl() + '/offers', $scope.newOffer)
 		.success(function(data){
-			$scope.message = "Offer successfully created.";
 			$scope.newOffer = {};
+			$location.path('/nearby');
 		})
 		.error(function(data, status){
 			$scope.errorMessage = data['message'];
@@ -76,10 +76,15 @@ appControllers.controller("OfferCreationController", function($scope, $http, Nav
 	};
 });
 
-appControllers.controller("UserController", function($scope, $http, config, NavBarService, User){
+appControllers.controller("UserController", function($scope, $http, $location, config, NavBarService, User){
 	NavBarService.setState("", NavBarService.ButtonTypes.MENU);
 	$scope.User = {};
 	$scope.newUser = {};
+	if (User.isLoggedIn())
+	{
+		$scope.user = User.getUserDetails();
+	}
+
 
 	function isValidUser(user) {
 		var required = ['first_name', 'last_name', 'email', 'password', 'password2'];
@@ -104,9 +109,9 @@ appControllers.controller("UserController", function($scope, $http, config, NavB
 		if (isValidUser(newUser)) {
 			$http.post(config.getBaseUrl() + "/users", newUser)
 			.success(function(data){
-				$scope.message = "User " + newUser['email'] + " successfully signed up."
 				User.login(data);
 				$scope.newUser = {};
+				$location.path("/mine");
 			})
 			.error(function(data, status){
 				$scope.errorMessage = "User creation failed: " + data;
@@ -121,9 +126,9 @@ appControllers.controller("UserController", function($scope, $http, config, NavB
 		if (newUser.email && newUser.password) {
 			$http.post(config.getBaseUrl() + "/login", newUser)
 			.success(function(data){
-				$scope.message = "User " + newUser['email'] + " successfully logged in."
 				User.login(data);
 				$scope.newUser = {};
+				$location.path("/mine");
 			})
 			.error(function(data, status){
 				$scope.errorMessage = "User login failed: " + data;
@@ -134,8 +139,8 @@ appControllers.controller("UserController", function($scope, $http, config, NavB
 	$scope.logout = function(){
 		$http.post(config.getBaseUrl() + "/logout")
 		.success(function(data){
-			$scope.message = "User successfully logged out."
 			User.logout();
+			$location.path("/login");
 		})
 		.error(function(data, status){
 			$scope.errorMessage = "User logout failed: " + data;
