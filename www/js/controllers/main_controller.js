@@ -14,13 +14,14 @@ appControllers.controller("NavigationBarController", function($scope, NavBarServ
 	};
 });
 
-appControllers.controller('MyOffersController', function($scope, $http, NavBarService, config){
+appControllers.controller('MyOffersController', function($scope, $http, NavBarService, config, localStorageService){
 	NavBarService.setState("My Offers", NavBarService.ButtonTypes.MENU);
-	$scope.offers = $scope.offers || [];
+	$scope.offers = localStorageService.get('myOffers') || [];
 	$scope.getOffers = function() {
 		$http.get(config.getBaseUrl() + "/offers/mine")
 		.success(function(data) {
 			$scope.offers = data;
+			localStorageService.set('myOffers', data);
 		})
 		.error(function(data, status, headers, config){
 			console.error(data);
@@ -31,13 +32,14 @@ appControllers.controller('MyOffersController', function($scope, $http, NavBarSe
 	}
 });
 
-appControllers.controller('NearbyOffersController', function($scope, $http, NavBarService, config){
+appControllers.controller('NearbyOffersController', function($scope, $http, NavBarService, config, localStorageService){
 	NavBarService.setState("Public Offers", NavBarService.ButtonTypes.MENU);
-	$scope.offers = $scope.offers || []
+	$scope.offers = localStorageService.get('nearbyOffers') || []
 	$scope.getOffers = function() {
 		$http.get(config.getBaseUrl() + "/offers/nearby")
 		.success(function(data) {
 			$scope.offers = data;
+			localStorageService.set('nearbyOffers', data);
 		})
 		.error(function(data, status, headers, config){
 			console.error(data);
