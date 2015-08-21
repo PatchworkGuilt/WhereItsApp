@@ -1,6 +1,6 @@
 var appServices = angular.module('WhereItsAppServices', []);
 
-appServices.factory('config', function($cookies){
+appServices.factory('config', function(localStorageService){
 	var environments = [{
 		'name': 'Local',
 		'url': "http://localhost:5000",
@@ -17,7 +17,7 @@ appServices.factory('config', function($cookies){
 		'displayClass': "text-danger"
 	}];
 
-	var ENV_INDEX = $cookies.get("WIAPPEnvIndex") || 0;
+	var ENV_INDEX = localStorageService.get("WIAPPEnvIndex") || 0;
 
 	var getAttribute = function(attr){
 		return environments[ENV_INDEX][attr];
@@ -25,7 +25,7 @@ appServices.factory('config', function($cookies){
 
 	this.toggleEnv = function(newEnv) {
 		ENV_INDEX = (ENV_INDEX + 1) % environments.length;
-		$cookies.put("WIAPPEnvIndex", ENV_INDEX);
+		localStorageService.set("WIAPPEnvIndex", ENV_INDEX);
 	}
 
 	this.getBaseUrl = function(){
@@ -43,21 +43,21 @@ appServices.factory('config', function($cookies){
 	return this;
 });
 
-appServices.factory('User', function($cookies, $rootScope, config){
-	var userCookieID = function(){ return "WIAPPUser-" + config.getEnvName()};
+appServices.factory('User', function($rootScope, config, localStorageService){
+	var userStorageID = function(){ return "WIAPPUser-" + config.getEnvName()};
 	var loggedInUser = null;
-	var user = $cookies.get(userCookieID());
+	var user = localStorageService.get(userStorageID());
 	if (user) {
 		loggedInUser = JSON.parse(user);
 	}
 
 	this.login = function(user) {
-		$cookies.put(userCookieID(), JSON.stringify(user));
+		localStorageService.set(userStorageID(), JSON.stringify(user));
 		loggedInUser = user;
 	}
 
 	this.logout = function() {
-		$cookies.remove(userCookieID());
+		localStorageService.remove(userStorageID());
 		loggedInUser = null;
 	}
 
@@ -138,7 +138,8 @@ appServices.factory('appHttpInterceptor', function($q, User, RequestsCounter){
 appServices.factory('NavBarService', function(){
 	var ButtonTypes = {
 		BACK: "BACK",
-		MENU: "MENU"
+		MENU: "MENU",
+		REFRESH: "REFRESH"
 	};
 	var defaultState = {
 		button: ButtonTypes.MENU,

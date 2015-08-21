@@ -1,6 +1,5 @@
 app = angular.module('WhereItsApp', [
   'ngRoute',
-  'ngCookies',
   'ngModal',
   'LocalStorageModule',
   'mobile-angular-ui',

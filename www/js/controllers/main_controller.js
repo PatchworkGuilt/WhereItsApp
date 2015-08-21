@@ -14,7 +14,10 @@ appControllers.controller("NavigationBarController", function($scope, NavBarServ
 	};
 });
 
-appControllers.controller('MyOffersController', function($scope, $http, NavBarService, config, localStorageService){
+appControllers.controller('MyOffersController', function($scope, $http, $location, NavBarService, config, User, localStorageService){
+	if (!User.isLoggedIn()) {
+		$location.path("/login");
+	}
 	NavBarService.setState("My Offers", NavBarService.ButtonTypes.MENU);
 	$scope.offers = localStorageService.get('myOffers') || [];
 	$scope.getOffers = function() {
