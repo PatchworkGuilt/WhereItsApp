@@ -37,11 +37,16 @@
               {{getBarText()}}
             </div>
             <div class="btn-group pull-left">
-              <div ng-show="getButtonType()=='MENU'" ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
+              <div ng-show="getLeftButtonType()=='MENU'" ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
                 <i class="fa fa-bars"></i> Menu
               </div>
-              <div ng-show="getButtonType()=='BACK'" class="btn" ng-click="goBack()" >
+              <div ng-show="getLeftButtonType()=='BACK'" class="btn" ng-click="goBack()" >
                 <i class="fa fa-chevron-left"></i> Back
+              </div>
+            </div>
+            <div class="btn-group pull-right">
+              <div ng-show="getRightButtonType()=='REFRESH'" class="btn btn-lg" ng-click="rightButtonCallback()" >
+                <i class="fa fa-refresh"></i>
               </div>
             </div>
         </div>

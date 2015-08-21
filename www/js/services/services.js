@@ -142,8 +142,9 @@ appServices.factory('NavBarService', function(){
 		REFRESH: "REFRESH"
 	};
 	var defaultState = {
-		button: ButtonTypes.MENU,
-		text: "WhereItsApp"
+		leftButton: ButtonTypes.MENU,
+		text: "WhereItsApp",
+		rightButton: null
 	};
 
 	var currentState;
@@ -151,14 +152,11 @@ appServices.factory('NavBarService', function(){
 	return {
 		ButtonTypes: ButtonTypes, 
 
-		setState: function(text, button) {
-			if (text != undefined && button) {
-				currentState = {
-					button: button,
-					text: text
-				}
+		setState: function(newState) {
+			if (newState.text != undefined && newState.leftButton) {
+				currentState = newState
 			} else {
-				console.error("Attempting to set bad NavBar state: ", text, button);
+				console.error("Attempting to set bad NavBar state: ", newState);
 			}
 		},
 
@@ -166,12 +164,23 @@ appServices.factory('NavBarService', function(){
 			currentState = null;
 		},
 
-		getButtonType: function() {
+		getLeftButtonType: function() {
 			if (currentState) {
-				return currentState.button;
+				return currentState.leftButton;
 			} else {
-				return defaultState.button;
+				return defaultState.leftButton;
 			}
+		},
+		getRightButtonType: function() {
+			if (currentState) {
+				return currentState.rightButton;
+			} else {
+				return defaultState.rightButton;
+			}
+		},
+
+		getRightButtonCallback: function() {
+			return currentState.rightButtonCallback;
 		},
 
 		getText: function() {

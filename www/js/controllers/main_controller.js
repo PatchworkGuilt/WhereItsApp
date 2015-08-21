@@ -6,11 +6,18 @@ appControllers.controller('MainController', function($scope, config){
 
 appControllers.controller("NavigationBarController", function($scope, NavBarService){
 	$scope.getBarText = NavBarService.getText;
-	$scope.getButtonType = NavBarService.getButtonType;
+	$scope.getLeftButtonType = NavBarService.getLeftButtonType;
+	$scope.getRightButtonType = NavBarService.getRightButtonType;
 
 	$scope.goBack = function() {
 		NavBarService.setStateToDefault();
 		window.history.back();
+	};
+
+	$scope.rightButtonCallback = function(){
+		var callback = NavBarService.getRightButtonCallback();
+		if (callback)
+			callback();
 	};
 });
 
@@ -18,7 +25,12 @@ appControllers.controller('MyOffersController', function($scope, $http, $locatio
 	if (!User.isLoggedIn()) {
 		$location.path("/login");
 	}
-	NavBarService.setState("My Offers", NavBarService.ButtonTypes.MENU);
+	NavBarService.setState({
+		'text': "My Offers", 
+		'leftButton': NavBarService.ButtonTypes.MENU, 
+		'rightButton': NavBarService.ButtonTypes.REFRESH,
+		'rightButtonCallback': $scope.getOffers
+	});
 	$scope.offers = localStorageService.get('myOffers') || [];
 	$scope.getOffers = function() {
 		$http.get(config.getBaseUrl() + "/offers/mine")
@@ -30,13 +42,18 @@ appControllers.controller('MyOffersController', function($scope, $http, $locatio
 			console.error(data);
 		});
 	};
+	NavBarService.setState({
+		'text': "My Offers", 
+		'leftButton': NavBarService.ButtonTypes.MENU, 
+		'rightButton': NavBarService.ButtonTypes.REFRESH,
+		'rightButtonCallback': $scope.getOffers
+	});
 	if (!$scope.offers.length) {
 		$scope.getOffers();	
 	}
 });
 
 appControllers.controller('NearbyOffersController', function($scope, $http, NavBarService, config, localStorageService){
-	NavBarService.setState("Public Offers", NavBarService.ButtonTypes.MENU);
 	$scope.offers = localStorageService.get('nearbyOffers') || []
 	$scope.getOffers = function() {
 		$http.get(config.getBaseUrl() + "/offers/nearby")
@@ -48,13 +65,19 @@ appControllers.controller('NearbyOffersController', function($scope, $http, NavB
 			console.error(data);
 		});
 	};
+	NavBarService.setState({
+		'text': "Public Offers",
+		'leftButton': NavBarService.ButtonTypes.MENU,
+		'rightButton': NavBarService.ButtonTypes.REFRESH,
+		'rightButtonCallback': $scope.getOffers
+	});
 	if (!$scope.offers.length) {
 		$scope.getOffers();	
 	}
 });
 
 appControllers.controller("OfferDetailController", function($scope, $http, $routeParams, NavBarService, config){
-	NavBarService.setState("", NavBarService.ButtonTypes.BACK);
+	NavBarService.setState({'text': "", 'leftButton': NavBarService.ButtonTypes.BACK});
 	var offerId = $routeParams.offerId;
 	$http.get(config.getBaseUrl() + '/offers/' + offerId)
 	.success(function(data) {
@@ -66,7 +89,7 @@ appControllers.controller("OfferDetailController", function($scope, $http, $rout
 });
 
 appControllers.controller("OfferCreationController", function($scope, $http, $location, NavBarService, config){
-	NavBarService.setState("Create New", NavBarService.ButtonTypes.MENU);
+	NavBarService.setState({'text': "Create New", 'leftButton': NavBarService.ButtonTypes.MENU});
 	$scope.newOffer = {};
 
 	$scope.onSubmit = function(){
@@ -82,7 +105,7 @@ appControllers.controller("OfferCreationController", function($scope, $http, $lo
 });
 
 appControllers.controller("UserController", function($scope, $http, $location, config, NavBarService, User){
-	NavBarService.setState("", NavBarService.ButtonTypes.MENU);
+	NavBarService.setState({'text': "", 'leftButton': NavBarService.ButtonTypes.MENU});
 	$scope.User = {};
 	$scope.newUser = {};
 	if (User.isLoggedIn())
