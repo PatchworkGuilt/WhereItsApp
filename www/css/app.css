@@ -9,7 +9,7 @@ ng-view {
 }
 
 .secondary-color {
-	background-color: rgba(120, 192, 168, .5); /*this is the primary color at .5 opacity*/
+	background-color: #DDDDDD;
 	color: black;
 }
 
