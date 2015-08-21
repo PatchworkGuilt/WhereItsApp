@@ -3,8 +3,23 @@ ng-view {
 	background-color: white;
 }
 
+.primary-color {
+	background-color: #78C0A8;
+	color: white;
+}
+
+.secondary-color {
+	background-color: rgba(120, 192, 168, .5); /*this is the primary color at .5 opacity*/
+	color: black;
+}
+
 .app-name {
 	line-height: 50px;
+}
+
+.list-group-item.active, .list-group-item.active:focus {
+    background-color: #34aadc;
+    border-color: #34AAE9;
 }
 
 #hate-it-options {
@@ -94,7 +109,7 @@ address {
 a.offer-item {
 	padding-top: 20px;
 	padding-bottom: 20px;
-	border-bottom-width: 5px;
+	border-bottom-width: 10px;
 }
 
 hr {

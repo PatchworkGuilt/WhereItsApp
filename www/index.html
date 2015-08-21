@@ -26,13 +26,13 @@
 
     <!-- Sidebars -->
     <div ng-include="'templates/sidebar.html'" 
-            class="sidebar sidebar-left"></div>
+            class="sidebar sidebar-left secondary-color"></div>
 
     <div class="app">
 
       <!-- Navbars -->
 
-        <div class="navbar navbar-app navbar-absolute-top" ng-controller="NavigationBarController">
+        <div class="navbar navbar-app navbar-absolute-top primary-color" ng-controller="NavigationBarController">
             <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
               {{getBarText()}}
             </div>
