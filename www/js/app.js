@@ -3,7 +3,6 @@ app = angular.module('WhereItsApp', [
   'ngModal',
   'ngTouch',
   'LocalStorageModule',
-  'mobile-angular-ui',
   'WhereItsAppServices',
   'WhereItsAppControllers',
   'WhereItsAppDirectives'

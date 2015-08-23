@@ -17,6 +17,16 @@ ng-view {
 	line-height: 50px;
 }
 
+.sidebar-left {
+	position: absolute;
+	left: -300px;
+	width: 300px;
+}
+
+.sidebar-left .active {
+	left: 0px;
+}
+
 .list-group-item.active, .list-group-item.active:focus {
     background-color: #34aadc;
     border-color: #34AAE9;
