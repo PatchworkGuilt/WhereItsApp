@@ -1,48 +1,89 @@
 appControllers = angular.module('WhereItsAppControllers', []);
 
-appControllers.controller('MainController', ['$scope', 'config', function($scope, config){
+appControllers.controller('MainController', function($scope, config){
 	$scope.config = config;
-}]);
+});
 
-appControllers.controller("NavigationBarController", function($scope){
-	$scope.mainBarText = "WhereItsApp";
-
-	$scope.buttonType = "menu";
+appControllers.controller("NavigationBarController", function($scope, NavBarService){
+	$scope.getBarText = NavBarService.getText;
+	$scope.getLeftButtonType = NavBarService.getLeftButtonType;
+	$scope.getRightButtonType = NavBarService.getRightButtonType;
 
 	$scope.goBack = function() {
-		$scope.buttonType = "menu";
+		NavBarService.setStateToDefault();
 		window.history.back();
+	};
+
+	$scope.rightButtonCallback = function(){
+		var callback = NavBarService.getRightButtonCallback();
+		if (callback)
+			callback();
 	};
 });
 
-appControllers.controller('MyOffersController', ['$scope', '$http', 'config', function($scope, $http, config){
-	$scope.offers = [];
+appControllers.controller('MyOffersController', function($scope, $http, $location, NavBarService, config, User, localStorageService){
+	if (!User.isLoggedIn()) {
+		$location.path("/login");
+	}
+	NavBarService.setState({
+		'text': "My Offers", 
+		'leftButton': NavBarService.ButtonTypes.MENU, 
+		'rightButton': NavBarService.ButtonTypes.REFRESH,
+		'rightButtonCallback': $scope.getOffers
+	});
+	$scope.offers = localStorageService.get('myOffers') || [];
 	$scope.getOffers = function() {
+		$scope.showSpinner = true;
 		$http.get(config.getBaseUrl() + "/offers/mine")
 		.success(function(data) {
 			$scope.offers = data;
+			localStorageService.set('myOffers', data);
+			$scope.showSpinner = false;
 		})
 		.error(function(data, status, headers, config){
 			console.error(data);
+			$scope.showSpinner = false;
 		});
-	}
-	$scope.getOffers();	
-}]);
-
-appControllers.controller('NearbyOffersController', ['$scope', '$http', 'config', function($scope, $http, config){
-	$scope.offers = []
-	$http.get(config.getBaseUrl() + "/offers/nearby")
-	.success(function(data) {
-		$scope.offers = data;
-	})
-	.error(function(data, status, headers, config){
-		console.error(data);
+	};
+	NavBarService.setState({
+		'text': "My Offers", 
+		'leftButton': NavBarService.ButtonTypes.MENU, 
+		'rightButton': NavBarService.ButtonTypes.REFRESH,
+		'rightButtonCallback': $scope.getOffers
 	});
-}]);
+	if (!$scope.offers.length) {
+		$scope.getOffers();	
+	}
+});
 
-appControllers.controller("OfferDetailController", function($scope, $http, $routeParams, $rootScope, config){
-	//$GET offer details from backend
-	$rootScope.navbarBack = true;
+appControllers.controller('NearbyOffersController', function($scope, $http, NavBarService, config, localStorageService){
+	$scope.offers = localStorageService.get('nearbyOffers') || []
+	$scope.getOffers = function() {
+		$scope.showSpinner = true;
+		$http.get(config.getBaseUrl() + "/offers/nearby")
+		.success(function(data) {
+			$scope.offers = data;
+			localStorageService.set('nearbyOffers', data);
+			$scope.showSpinner = false;
+		})
+		.error(function(data, status, headers, config){
+			console.error(data);
+			$scope.showSpinner = false;
+		});
+	};
+	NavBarService.setState({
+		'text': "Public Offers",
+		'leftButton': NavBarService.ButtonTypes.MENU,
+		'rightButton': NavBarService.ButtonTypes.REFRESH,
+		'rightButtonCallback': $scope.getOffers
+	});
+	if (!$scope.offers.length) {
+		$scope.getOffers();	
+	}
+});
+
+appControllers.controller("OfferDetailController", function($scope, $http, $routeParams, NavBarService, config){
+	NavBarService.setState({'text': "", 'leftButton': NavBarService.ButtonTypes.BACK});
 	var offerId = $routeParams.offerId;
 	$http.get(config.getBaseUrl() + '/offers/' + offerId)
 	.success(function(data) {
@@ -53,14 +94,15 @@ appControllers.controller("OfferDetailController", function($scope, $http, $rout
 	});
 });
 
-appControllers.controller("OfferCreationController", function($scope, $http, config){
+appControllers.controller("OfferCreationController", function($scope, $http, $location, NavBarService, config){
+	NavBarService.setState({'text': "Create New", 'leftButton': NavBarService.ButtonTypes.MENU});
 	$scope.newOffer = {};
 
 	$scope.onSubmit = function(){
 		$http.post(config.getBaseUrl() + '/offers', $scope.newOffer)
 		.success(function(data){
-			$scope.message = "Offer successfully created.";
 			$scope.newOffer = {};
+			$location.path('/nearby');
 		})
 		.error(function(data, status){
 			$scope.errorMessage = data['message'];
@@ -68,9 +110,15 @@ appControllers.controller("OfferCreationController", function($scope, $http, con
 	};
 });
 
-appControllers.controller("UserController", function($scope, $http, config, User){
+appControllers.controller("UserController", function($scope, $http, $location, config, NavBarService, User){
+	NavBarService.setState({'text': "", 'leftButton': NavBarService.ButtonTypes.MENU});
 	$scope.User = {};
 	$scope.newUser = {};
+	if (User.isLoggedIn())
+	{
+		$scope.user = User.getUserDetails();
+	}
+
 
 	function isValidUser(user) {
 		var required = ['first_name', 'last_name', 'email', 'password', 'password2'];
@@ -95,9 +143,9 @@ appControllers.controller("UserController", function($scope, $http, config, User
 		if (isValidUser(newUser)) {
 			$http.post(config.getBaseUrl() + "/users", newUser)
 			.success(function(data){
-				$scope.message = "User " + newUser['email'] + " successfully signed up."
 				User.login(data);
 				$scope.newUser = {};
+				$location.path("/mine");
 			})
 			.error(function(data, status){
 				$scope.errorMessage = "User creation failed: " + data;
@@ -112,9 +160,9 @@ appControllers.controller("UserController", function($scope, $http, config, User
 		if (newUser.email && newUser.password) {
 			$http.post(config.getBaseUrl() + "/login", newUser)
 			.success(function(data){
-				$scope.message = "User " + newUser['email'] + " successfully logged in."
 				User.login(data);
 				$scope.newUser = {};
+				$location.path("/mine");
 			})
 			.error(function(data, status){
 				$scope.errorMessage = "User login failed: " + data;
@@ -125,8 +173,8 @@ appControllers.controller("UserController", function($scope, $http, config, User
 	$scope.logout = function(){
 		$http.post(config.getBaseUrl() + "/logout")
 		.success(function(data){
-			$scope.message = "User successfully logged out."
 			User.logout();
+			$location.path("/login");
 		})
 		.error(function(data, status){
 			$scope.errorMessage = "User logout failed: " + data;
@@ -204,9 +252,10 @@ appControllers.controller("OfferResponseController", function($scope, $http, $ro
 	}
 });
 
-appControllers.controller("LoadingSpinnerController", function($scope, RequestsCounter){
-	$scope.shouldShowSpinner = RequestsCounter.hasPendingRequests;
+appControllers.controller("LoadingSpinnerController", function($scope, LoadingSpinner){
+	$scope.shouldShowSpinner = LoadingSpinner.shouldShowSpinner;
 });
+
 
 
 

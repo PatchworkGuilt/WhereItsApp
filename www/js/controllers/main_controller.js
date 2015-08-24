@@ -33,13 +33,16 @@ appControllers.controller('MyOffersController', function($scope, $http, $locatio
 	});
 	$scope.offers = localStorageService.get('myOffers') || [];
 	$scope.getOffers = function() {
+		$scope.showSpinner = true;
 		$http.get(config.getBaseUrl() + "/offers/mine")
 		.success(function(data) {
 			$scope.offers = data;
 			localStorageService.set('myOffers', data);
+			$scope.showSpinner = false;
 		})
 		.error(function(data, status, headers, config){
 			console.error(data);
+			$scope.showSpinner = false;
 		});
 	};
 	NavBarService.setState({
@@ -56,13 +59,16 @@ appControllers.controller('MyOffersController', function($scope, $http, $locatio
 appControllers.controller('NearbyOffersController', function($scope, $http, NavBarService, config, localStorageService){
 	$scope.offers = localStorageService.get('nearbyOffers') || []
 	$scope.getOffers = function() {
+		$scope.showSpinner = true;
 		$http.get(config.getBaseUrl() + "/offers/nearby")
 		.success(function(data) {
 			$scope.offers = data;
 			localStorageService.set('nearbyOffers', data);
+			$scope.showSpinner = false;
 		})
 		.error(function(data, status, headers, config){
 			console.error(data);
+			$scope.showSpinner = false;
 		});
 	};
 	NavBarService.setState({
@@ -246,9 +252,10 @@ appControllers.controller("OfferResponseController", function($scope, $http, $ro
 	}
 });
 
-appControllers.controller("LoadingSpinnerController", function($scope, RequestsCounter){
-	$scope.shouldShowSpinner = RequestsCounter.hasPendingRequests;
+appControllers.controller("LoadingSpinnerController", function($scope, LoadingSpinner){
+	$scope.shouldShowSpinner = LoadingSpinner.shouldShowSpinner;
 });
+
 
 
 

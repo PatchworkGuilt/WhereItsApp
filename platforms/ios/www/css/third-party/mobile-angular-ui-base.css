@@ -7277,7 +7277,6 @@ a.list-group-item .icon.pull-right {
   line-height: 50px;
   padding-top: 0;
   padding-bottom: 0;
-  color: #007aff;
   text-transform: uppercase;
 }
 
@@ -7398,7 +7397,6 @@ a.list-group-item .icon.pull-right {
   line-height: 70px;
   padding: 0 10px;
   font-size: 23px;
-  color: #ffffff;
   margin: 0;
   z-index: 10;
 }

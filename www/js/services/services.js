@@ -88,53 +88,6 @@ appServices.factory('User', function($rootScope, config, localStorageService){
 	return this;
 });
 
-appServices.factory('RequestsCounter', function(){
-	var numActiveRequests = 0;
-	this.startRequest = function(thing) {
-		numActiveRequests++;
-	}
-
-	this.completeRequest = function(){
-		numActiveRequests--;
-		if (numActiveRequests < 0)
-			numActiveRequests = 0;
-	}
-
-	this.hasPendingRequests = function(){
-		return numActiveRequests > 0;
-	}
-
-	return this;
-});
-
-appServices.factory('appHttpInterceptor', function($q, User, RequestsCounter){
-	return {
-		//TODO: ADD "AUTHORIZATION" header
-	    'request': function(config) {
-			// do something on success
-			RequestsCounter.startRequest(config)
-			return config;
-	    },
-
-	   'requestError': function(rejection) {
-			// do something on error
-			return $q.reject(rejection);
-	    },
-
-	    'response': function(response) {
-			// do something on success
-			RequestsCounter.completeRequest()
-			return response;
-	    },
-
-	   'responseError': function(rejection) {
-			RequestsCounter.completeRequest()
-			// do something on error
-			return $q.reject(rejection);
-	    }
-	  };
-});
-
 appServices.factory('NavBarService', function(){
 	var ButtonTypes = {
 		BACK: "BACK",
@@ -189,6 +142,21 @@ appServices.factory('NavBarService', function(){
 			} else {
 				return defaultState.text;
 			}
+		}
+	}
+});
+
+appServices.factory('LoadingSpinner', function(){
+	var showSpinner = false;
+	return {
+		shouldShowSpinner: function(){
+			return false;
+		},
+		showSpinner: function(){
+			showSpinner = true;
+		},
+		hideSpinner: function(){
+			showSpinner = false;
 		}
 	}
 });

@@ -4,7 +4,8 @@ app = angular.module('WhereItsApp', [
   'LocalStorageModule',
   'mobile-angular-ui',
   'WhereItsAppServices',
-  'WhereItsAppControllers'
+  'WhereItsAppControllers',
+  'WhereItsAppDirectives'
 ]);
 
 app.config(function($routeProvider, $httpProvider, ngModalDefaultsProvider) {
@@ -15,8 +16,6 @@ app.config(function($routeProvider, $httpProvider, ngModalDefaultsProvider) {
 	$routeProvider.when('/nearby', {templateUrl:'templates/offers.html',  controller: 'NearbyOffersController'});
 	$routeProvider.when('/offers/:offerId', {templateUrl:'templates/offer-detail.html',  controller: 'OfferDetailController'});
 	$routeProvider.when('/create', {templateUrl:'templates/offer-create.html',  controller: 'OfferCreationController'});
-
-	$httpProvider.interceptors.push('appHttpInterceptor');
 
 	ngModalDefaultsProvider.set('closeButtonHtml', '<i class="fa fa-times"></i>')
 });

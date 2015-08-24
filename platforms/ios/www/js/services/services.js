@@ -1,6 +1,6 @@
 var appServices = angular.module('WhereItsAppServices', []);
 
-appServices.factory('config', function($cookies){
+appServices.factory('config', function(localStorageService){
 	var environments = [{
 		'name': 'Local',
 		'url': "http://localhost:5000",
@@ -17,7 +17,7 @@ appServices.factory('config', function($cookies){
 		'displayClass': "text-danger"
 	}];
 
-	var ENV_INDEX = $cookies.get("WIAPPEnvIndex") || 0;
+	var ENV_INDEX = localStorageService.get("WIAPPEnvIndex") || 0;
 
 	var getAttribute = function(attr){
 		return environments[ENV_INDEX][attr];
@@ -25,7 +25,7 @@ appServices.factory('config', function($cookies){
 
 	this.toggleEnv = function(newEnv) {
 		ENV_INDEX = (ENV_INDEX + 1) % environments.length;
-		$cookies.put("WIAPPEnvIndex", ENV_INDEX);
+		localStorageService.set("WIAPPEnvIndex", ENV_INDEX);
 	}
 
 	this.getBaseUrl = function(){
@@ -43,21 +43,21 @@ appServices.factory('config', function($cookies){
 	return this;
 });
 
-appServices.factory('User', function($cookies, $rootScope, config){
-	var userCookieID = function(){ return "WIAPPUser-" + config.getEnvName()};
+appServices.factory('User', function($rootScope, config, localStorageService){
+	var userStorageID = function(){ return "WIAPPUser-" + config.getEnvName()};
 	var loggedInUser = null;
-	var user = $cookies.get(userCookieID());
+	var user = localStorageService.get(userStorageID());
 	if (user) {
 		loggedInUser = JSON.parse(user);
 	}
 
 	this.login = function(user) {
-		$cookies.put(userCookieID(), JSON.stringify(user));
+		localStorageService.set(userStorageID(), JSON.stringify(user));
 		loggedInUser = user;
 	}
 
 	this.logout = function() {
-		$cookies.remove(userCookieID());
+		localStorageService.remove(userStorageID());
 		loggedInUser = null;
 	}
 
@@ -88,49 +88,75 @@ appServices.factory('User', function($cookies, $rootScope, config){
 	return this;
 });
 
-appServices.factory('RequestsCounter', function(){
-	var numActiveRequests = 0;
-	this.startRequest = function(thing) {
-		numActiveRequests++;
-	}
+appServices.factory('NavBarService', function(){
+	var ButtonTypes = {
+		BACK: "BACK",
+		MENU: "MENU",
+		REFRESH: "REFRESH"
+	};
+	var defaultState = {
+		leftButton: ButtonTypes.MENU,
+		text: "WhereItsApp",
+		rightButton: null
+	};
 
-	this.completeRequest = function(){
-		numActiveRequests--;
-		if (numActiveRequests < 0)
-			numActiveRequests = 0;
-	}
+	var currentState;
 
-	this.hasPendingRequests = function(){
-		return numActiveRequests > 0;
-	}
+	return {
+		ButtonTypes: ButtonTypes, 
 
-	return this;
+		setState: function(newState) {
+			if (newState.text != undefined && newState.leftButton) {
+				currentState = newState
+			} else {
+				console.error("Attempting to set bad NavBar state: ", newState);
+			}
+		},
+
+		setStateToDefault: function() {
+			currentState = null;
+		},
+
+		getLeftButtonType: function() {
+			if (currentState) {
+				return currentState.leftButton;
+			} else {
+				return defaultState.leftButton;
+			}
+		},
+		getRightButtonType: function() {
+			if (currentState) {
+				return currentState.rightButton;
+			} else {
+				return defaultState.rightButton;
+			}
+		},
+
+		getRightButtonCallback: function() {
+			return currentState.rightButtonCallback;
+		},
+
+		getText: function() {
+			if (currentState) {
+				return currentState.text;
+			} else {
+				return defaultState.text;
+			}
+		}
+	}
 });
 
-appServices.factory('appHttpInterceptor', function($q, User, RequestsCounter){
+appServices.factory('LoadingSpinner', function(){
+	var showSpinner = false;
 	return {
-		//TODO: ADD "AUTHORIZATION" header
-	    'request': function(config) {
-			// do something on success
-			RequestsCounter.startRequest(config)
-			return config;
-	    },
-
-	   'requestError': function(rejection) {
-			// do something on error
-			return $q.reject(rejection);
-	    },
-
-	    'response': function(response) {
-			// do something on success
-			RequestsCounter.completeRequest()
-			return response;
-	    },
-
-	   'responseError': function(rejection) {
-			RequestsCounter.completeRequest()
-			// do something on error
-			return $q.reject(rejection);
-	    }
-	  };
+		shouldShowSpinner: function(){
+			return false;
+		},
+		showSpinner: function(){
+			showSpinner = true;
+		},
+		hideSpinner: function(){
+			showSpinner = false;
+		}
+	}
 });

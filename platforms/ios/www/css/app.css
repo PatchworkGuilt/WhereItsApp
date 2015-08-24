@@ -3,8 +3,23 @@ ng-view {
 	background-color: white;
 }
 
+.primary-color {
+	background-color: #78C0A8;
+	color: white;
+}
+
+.secondary-color {
+	background-color: #DDDDDD;
+	color: black;
+}
+
 .app-name {
 	line-height: 50px;
+}
+
+.list-group-item.active, .list-group-item.active:focus {
+    background-color: #34aadc;
+    border-color: #34AAE9;
 }
 
 #hate-it-options {
@@ -17,7 +32,7 @@ ng-view {
 	width: 100%;
 	z-index: 1;
 	background-color: #ddd;
-	opacity: .2;
+	opacity: .4;
 }
 
 #loadingImage {
@@ -29,6 +44,7 @@ ng-view {
 	z-index: 2;
 	margin-left: -32px;
 	margin-right: 32px;
+	margin-top: -32px;
 	position: absolute;
 }
 
@@ -94,7 +110,7 @@ address {
 a.offer-item {
 	padding-top: 20px;
 	padding-bottom: 20px;
-	border-bottom-width: 5px;
+	border-bottom-width: 10px;
 }
 
 hr {
@@ -103,4 +119,34 @@ hr {
 
 .directionsButton {
 	margin: 10px;
+}
+
+.my-panel {
+	margin-top: 10px;
+	border-color: #cccccc;
+}
+
+.my-panel .panel-heading {
+	padding: 5px;
+	background-color: white;
+	border-color: inherit;
+}
+
+.my-panel .panel-heading .panel-title {
+	font-size: 14px;
+}
+
+.my-label {
+	border-bottom: 1px solid;
+	border-radius: 0;
+	padding: .4em .6em;
+	font-size: 14px;
+}
+
+.my-label-primary {
+	color: #007aff;
+}
+
+.my-label-success {
+	color: #4cd964;
 }
