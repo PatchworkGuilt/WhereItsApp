@@ -21,12 +21,21 @@
 						<div class="panel-heading">
 							<h3 class="panel-title text-center"><strong>Expected Audience</strong></h3>
 						</div>
-						<div class="panel-body row">
+						<div ng-show="status == 'calculating'" class="panel-body row text-center">
+							Calculating <i class="fa fa-spinner fa-spin"></i>
+						</div>
+						<div ng-show="status == 'failed'" class="panel-body row text-center">
+							<div class="bg-danger">
+								Couldn't calculate audience. <i class="fa fa-exclamation-circle"></i><br/>
+								<a ng-click="calculateAudience()">Retry</a>
+							</div>
+						</div>
+						<div ng-show="status == 'success' && audience" class="panel-body row">
 							<div class="col-xs-6 text-left">
-								<span class="label my-label my-label-primary">13 Regulars</span>
+								<span class="label my-label my-label-primary">{{audience.confirmed}} Regulars</span>
 							</div>
 							<div class="col-xs-6 text-right">
-							<span class="label my-label my-label-success">27 Great Leads</span>
+							<span class="label my-label my-label-success">{{audience.new}} Great Leads</span>
 							</div>
 						</div>
 					</div>

@@ -97,6 +97,28 @@ appControllers.controller("OfferDetailController", function($scope, $http, $rout
 appControllers.controller("OfferCreationController", function($scope, $http, $location, NavBarService, config){
 	NavBarService.setState({'text': "Create New", 'leftButton': NavBarService.ButtonTypes.MENU});
 	$scope.newOffer = {};
+	$scope.calculateAudience = function() {
+		$scope.status = 'calculating';
+		$http.get(config.getBaseUrl() + '/audience')
+		.success(function(data){
+			if ('confirmed' in data && 'new' in data) {
+				$scope.status = 'success';
+				$scope.audience = {
+					'confirmed': data['confirmed'],
+					'new': data['new']
+				}
+			} else {
+				$scope.status = 'failed';
+			}
+
+
+		})
+		.error(function(data, status){
+			$scope.status = 'failed';
+		})
+	};
+
+	$scope.calculateAudience();
 
 	$scope.onSubmit = function(){
 		$http.post(config.getBaseUrl() + '/offers', $scope.newOffer)

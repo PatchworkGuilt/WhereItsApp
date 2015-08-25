@@ -5,7 +5,7 @@
 				<div class="scrollable-content">
 					<div class="col-md-offset-3 col-md-6">
 						<div class="text-center">
-							<p class="h4">You must be logged in to claim and manage offers.</p>
+							<p class="h4 loginMessage">You must be logged in to claim and manage offers.</p>
 							<button ng-click="viewToShow='signup'" class="btn btn-lg btn-info">Sign Up</button>
 							<button ng-click="viewToShow='login'" class="btn btn-lg btn-default">Log In</button>
 						</div>
@@ -50,6 +50,12 @@
 								<button type="submit" class="btn btn-info btn-block">Login</button>
 							</div>
 						</form>
+
+			            <div class="environmentToggle">
+		              		<div ng-click="config.toggleEnv()" class="btn">
+			                	<span class="{{config.getDisplayClass()}}">{{config.getEnvName()}}</span>
+			              	</div>
+			            </div>
 					</div>
 				</div>
 			</div>
