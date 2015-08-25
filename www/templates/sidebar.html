@@ -1,15 +1,15 @@
 <div ng-controller="SidebarController">
-  	<h3 class="app-name" ng-show="user.first_name">
-  		<i class="fa fa-user"></i> {{user.first_name}} {{user.last_name}}
+  	<h3 class="app-name" ng-show="userDetails().first_name">
+  		<i class="fa fa-user"></i> {{userDetails().first_name}} {{userDetails().last_name}}
 	</h3>
-  <h3 class="app-name" ng-hide="user.first_name">WhereItsApp</h3>
+  <h3 class="app-name" ng-hide="userDetails().first_name">WhereItsApp</h3>
   <div class="scrollable-content">
     <div class="list-group" ui-turn-off='uiSidebarLeft'>
       <a class="list-group-item" ng-show="isUserLoggedIn()" href="#/mine">My Offers<i class="fa fa-glass pull-right"></i></a>
       <a class="list-group-item" href="#/nearby">Public Offers<i class="fa fa-list pull-right"></i></a>
       <a class="list-group-item" ng-show="isUserLoggedIn()" href="#/create">Create New<i class="fa fa-plus pull-right"></i></a>
     </div>
-    <div class="list-group">
+    <div class="list-group" ui-turn-off='uiSidebarLeft'>
     	<a class="list-group-item" ng-hide="isUserLoggedIn()" href="#/login">Login / Signup<i class="fa fa-user pull-right"></i></a>
     	<a class="list-group-item" ng-show="isUserLoggedIn()" href="#/my-account">My Account<i class="fa fa-user pull-right"></i></a>
     </div>

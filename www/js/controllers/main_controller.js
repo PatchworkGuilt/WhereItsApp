@@ -207,7 +207,7 @@ appControllers.controller("UserController", function($scope, $http, $location, c
 
 appControllers.controller("SidebarController", function($scope, User){
 	$scope.isUserLoggedIn = User.isLoggedIn;
-	$scope.user = User.getUserDetails()
+	$scope.userDetails = User.getUserDetails;
 });
 
 appControllers.controller("OfferResponseController", function($scope, $http, $route, $routeParams, config, User){
