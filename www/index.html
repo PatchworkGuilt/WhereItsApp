@@ -13,8 +13,10 @@
     <link rel='stylesheet' href='fonts/google/playfair-display.css' type='text/css'>
     <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/app.css" />
+    <script type="text/javascript" src="cordova.js"></script>
     <script src="js/third-party/angular.js"></script>
     <script src="js/third-party/angular-route.js"></script>
+    <script src="js/third-party/angular-touch.js"></script>
     <script src="js/third-party/angular-local-storage.js"></script>
     <script src="js/third-party/mobile-angular-ui.js"></script>
     <script src="js/third-party/ng-modal.js"></script>
@@ -38,17 +40,17 @@
               {{getBarText()}}
             </div>
             <div class="btn-group pull-left">
-              <div ng-show="getLeftButtonType()=='MENU'" ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
+              <a ng-show="getLeftButtonType()=='MENU'" ui-toggle="uiSidebarLefty" class="btn sidebar-toggle">
                 <i class="fa fa-bars"></i> Menu
-              </div>
-              <div ng-show="getLeftButtonType()=='BACK'" class="btn" ng-click="goBack()" >
+              </a>
+              <a ng-show="getLeftButtonType()=='BACK'" class="btn" ng-click="goBack()" >
                 <i class="fa fa-chevron-left"></i> Back
-              </div>
+              </a>
             </div>
             <div class="btn-group pull-right">
-              <div ng-show="getRightButtonType()=='REFRESH'" class="btn btn-lg" ng-click="rightButtonCallback()" >
+              <a ng-show="getRightButtonType()=='REFRESH'" class="btn btn-lg" ng-click="rightButtonCallback()" >
                 <i class="fa fa-refresh"></i>
-              </div>
+              </a>
             </div>
         </div>
 

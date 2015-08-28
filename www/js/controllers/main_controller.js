@@ -24,6 +24,7 @@ appControllers.controller("NavigationBarController", function($scope, NavBarServ
 appControllers.controller('MyOffersController', function($scope, $http, $location, NavBarService, config, User, localStorageService){
 	if (!User.isLoggedIn()) {
 		$location.path("/login");
+		return;
 	}
 	NavBarService.setState({
 		'text': "My Offers", 
@@ -121,13 +122,16 @@ appControllers.controller("OfferCreationController", function($scope, $http, $lo
 	$scope.calculateAudience();
 
 	$scope.onSubmit = function(){
+		$scope.showSpinner = true;
 		$http.post(config.getBaseUrl() + '/offers', $scope.newOffer)
 		.success(function(data){
 			$scope.newOffer = {};
+			$scope.showSpinner = false;
 			$location.path('/nearby');
 		})
 		.error(function(data, status){
 			$scope.errorMessage = data['message'];
+			$scope.showSpinner = false;
 		});
 	};
 });
@@ -162,15 +166,18 @@ appControllers.controller("UserController", function($scope, $http, $location, c
 
 	$scope.signup = function(){
 		newUser = $scope.newUser;
+		$scope.showSpinner = true;
 		if (isValidUser(newUser)) {
 			$http.post(config.getBaseUrl() + "/users", newUser)
 			.success(function(data){
 				User.login(data);
 				$scope.newUser = {};
+				$scope.showSpinner = false;
 				$location.path("/mine");
 			})
 			.error(function(data, status){
 				$scope.errorMessage = "User creation failed: " + data;
+				$scope.showSpinner = false;
 			})
 		}
 	}
@@ -180,26 +187,32 @@ appControllers.controller("UserController", function($scope, $http, $location, c
 		$scope.message = null;
 		$scope.errorMessage = null;
 		if (newUser.email && newUser.password) {
+			$scope.showSpinner = true;
 			$http.post(config.getBaseUrl() + "/login", newUser)
 			.success(function(data){
 				User.login(data);
 				$scope.newUser = {};
+				$scope.showSpinner = false;
 				$location.path("/mine");
 			})
 			.error(function(data, status){
 				$scope.errorMessage = "User login failed: " + data;
+				$scope.showSpinner = false;
 			})
 		}
 	}
 
 	$scope.logout = function(){
+		$scope.showSpinner = true;
 		$http.post(config.getBaseUrl() + "/logout")
 		.success(function(data){
 			User.logout();
+			$scope.showSpinner = false;
 			$location.path("/login");
 		})
 		.error(function(data, status){
 			$scope.errorMessage = "User logout failed: " + data;
+			$scope.showSpinner = false;
 			User.logout();
 		})
 	}

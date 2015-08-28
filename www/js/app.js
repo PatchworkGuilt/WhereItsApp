@@ -1,6 +1,7 @@
 app = angular.module('WhereItsApp', [
   'ngRoute',
   'ngModal',
+  'ngTouch',
   'LocalStorageModule',
   'mobile-angular-ui',
   'WhereItsAppServices',
@@ -28,11 +29,5 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
     // Now safe to use the Cordova API
-	if(StatusBar) {
-		alert("FOUND STATUSBAR");
-		StatusBar.overlaysWebView(false);
-	}
-	else {
-		alert("NO STATUSBAR");
-	}
+
 }

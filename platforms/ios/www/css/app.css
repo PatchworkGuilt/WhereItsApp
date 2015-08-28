@@ -117,6 +117,16 @@ hr {
 	margin: 10px;
 }
 
+.loginMessage {
+	margin-top: 60px;
+	margin-bottom: 40px;
+}
+
+.environmentToggle {
+	float: right;
+	margin-top: 100px;
+}
+
 .directionsButton {
 	margin: 10px;
 }
