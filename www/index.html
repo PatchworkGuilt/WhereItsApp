@@ -10,12 +10,15 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
     <link rel="stylesheet" href="css/third-party/bootstrap.min.css" />
     <link rel="stylesheet" href="css/third-party/ng-modal.css" />
+    <link rel="stylesheet" href="css/third-party/angular-snap.min.css" />
     <link rel='stylesheet' href='fonts/google/playfair-display.css' type='text/css'>
     <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/app.css" />
     <script type="text/javascript" src="cordova.js"></script>
     <script src="js/third-party/jquery.min.js"></script>
+    <script src="js/third-party/snap.js"></script>
     <script src="js/third-party/angular.js"></script>
+    <script src="js/third-party/angular-snap.js"></script>
     <script src="js/third-party/angular-route.js"></script>
     <script src="js/third-party/angular-touch.js"></script>
     <script src="js/third-party/angular-local-storage.js"></script>
@@ -29,13 +32,15 @@
   <body ng-app="WhereItsApp" ng-controller="MainController">
 
     <!-- Sidebars -->
-    <div ng-include="'templates/sidebar.html'" 
-            class="sidebar sidebar-left secondary-color" ng-class="{active: showNav}"></div>
+    <snap-drawer>
+        <div ng-include="'templates/sidebar.html'" 
+            class="secondary-color" ng-class="{active: showNav}"></div>
+    </snap-drawer>
 
     <div class="app">
 
       <!-- Navbars -->
-
+        <snap-content>
         <div class="navbar navbar-app navbar-absolute-top primary-color" ng-controller="NavigationBarController">
             <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
               {{getBarText()}}
@@ -57,7 +62,7 @@
 
           <!-- App Body -->
         <ng-view></ng-view>  
-
+        </snap-content>
 
     </div><!-- ~ .app -->
 
