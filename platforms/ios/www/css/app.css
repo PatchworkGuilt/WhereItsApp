@@ -14,7 +14,12 @@ ng-view {
 }
 
 .app-name {
+	margin: 0;
 	line-height: 50px;
+}
+
+.mainContent {
+	background-color: white;
 }
 
 .list-group-item.active, .list-group-item.active:focus {

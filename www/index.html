@@ -32,36 +32,37 @@
   <body ng-app="WhereItsApp" ng-controller="MainController">
 
     <!-- Sidebars -->
-    <snap-drawer>
-        <div ng-include="'templates/sidebar.html'" 
-            class="secondary-color" ng-class="{active: showNav}"></div>
+    <snap-drawer class="secondary-color">
+        <div ng-include="'templates/sidebar.html'"></div>
     </snap-drawer>
 
     <div class="app">
 
       <!-- Navbars -->
-        <snap-content>
-        <div class="navbar navbar-app navbar-absolute-top primary-color" ng-controller="NavigationBarController">
-            <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
-              {{getBarText()}}
-            </div>
-            <div class="btn-group pull-left">
-              <div ng-show="getLeftButtonType()=='MENU'" ng-click="showNav = !showNav" class="btn">
-                <i class="fa fa-bars"></i> Menu
-              </a>
-              <a ng-show="getLeftButtonType()=='BACK'" class="btn" ng-click="goBack()" >
-                <i class="fa fa-chevron-left"></i> Back
-              </a>
-            </div>
-            <div class="btn-group pull-right">
-              <a ng-show="getRightButtonType()=='REFRESH'" class="btn btn-lg" ng-click="rightButtonCallback()" >
-                <i class="fa fa-refresh"></i>
-              </a>
-            </div>
-        </div>
+        <snap-content class="mainSnapContent">
+            <table class="navbar navbar-default primary-color my-navbar" role="navigation" ng-controller="NavigationBarController">
+                <tr class="my-navbar-row">
+                    <td class="leftNavButton">
+                    <a ng-show="getLeftButtonType()=='MENU'" snap-toggle="left">
+                        <i class="fa fa-bars"></i> 
+                    </a>
+                    <a ng-show="getLeftButtonType()=='BACK'" class="" ng-click="goBack()" >
+                        <i class="fa fa-chevron-left"></i> Back
+                    </a>
+                    </td>
+                    <td class="my-navbar-brand">
+                        {{getBarText()}}
+                    </td>
+                    <td class="rightNavButton">
+                    <a ng-show="getRightButtonType()=='REFRESH'" ng-click="rightButtonCallback()" >
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                    </td>
+                </tr>
+            </table>
 
-          <!-- App Body -->
-        <ng-view></ng-view>  
+              <!-- App Body -->
+            <ng-view></ng-view>  
         </snap-content>
 
     </div><!-- ~ .app -->
