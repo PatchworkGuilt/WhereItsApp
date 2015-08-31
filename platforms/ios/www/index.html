@@ -39,25 +39,27 @@
     <div class="app">
 
       <!-- Navbars -->
-        <snap-content class="mainContent">
-            <div class="navbar navbar-fixed-top primary-color" ng-controller="NavigationBarController">
-                <div class="btn-group pull-left">
-                  <div ng-show="getLeftButtonType()=='MENU'" snap-toggle="left" class="btn">
-                    <i class="fa fa-bars"></i> Menu
-                  </div>
-                  <div ng-show="getLeftButtonType()=='BACK'" class="btn" ng-click="goBack()" >
-                    <i class="fa fa-chevron-left"></i> Back
-                  </div>
-                </div>
-                <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
-                  {{getBarText()}}
-                </div>
-                <div class="btn-group pull-right">
-                  <div ng-show="getRightButtonType()=='REFRESH'" class="btn btn-lg" ng-click="rightButtonCallback()" >
-                    <i class="fa fa-refresh"></i>
-                  </div>
-                </div>
-            </div>
+        <snap-content class="mainSnapContent">
+            <table class="navbar navbar-default primary-color my-navbar" role="navigation" ng-controller="NavigationBarController">
+                <tr class="my-navbar-row">
+                    <td class="leftNavButton">
+                    <a ng-show="getLeftButtonType()=='MENU'" snap-toggle="left">
+                        <i class="fa fa-bars"></i> 
+                    </a>
+                    <a ng-show="getLeftButtonType()=='BACK'" class="" ng-click="goBack()" >
+                        <i class="fa fa-chevron-left"></i> Back
+                    </a>
+                    </td>
+                    <td class="my-navbar-brand">
+                        {{getBarText()}}
+                    </td>
+                    <td class="rightNavButton">
+                    <a ng-show="getRightButtonType()=='REFRESH'" ng-click="rightButtonCallback()" >
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                    </td>
+                </tr>
+            </table>
 
               <!-- App Body -->
             <ng-view></ng-view>  

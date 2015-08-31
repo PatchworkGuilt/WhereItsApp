@@ -9,12 +9,12 @@
 	color: black;
 }
 
-.app-content {
+.section {
 	padding-top: 20px;
 }
 
 .app-name {
-	margin: 0;
+	margin: 0 15px;
 	line-height: 50px;
 }
 
