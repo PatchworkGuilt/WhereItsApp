@@ -148,7 +148,8 @@ address {
 a.offer-item {
 	padding-top: 20px;
 	padding-bottom: 20px;
-	border-bottom-width: 10px;
+	margin-bottom: 10px;
+	border-radius: 4px;
 }
 
 hr {
