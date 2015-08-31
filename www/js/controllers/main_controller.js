@@ -225,14 +225,6 @@ appControllers.controller("SidebarController", function($scope, User){
 
 appControllers.controller("OfferResponseController", function($scope, $http, $route, $routeParams, config, User){
 	$scope.isUserLoggedIn = User.isLoggedIn;
-	$scope.showDropdown = false;
-
-	$scope.toggleHatridDropdown = function(){
-		if($scope.showDropdown)
-			$scope.showDropdown = false;
-		else
-			$scope.showDropdown = true;
-	}
 
 	$scope.respondToOffer = function(response) {
 		postData = {'response': response};
