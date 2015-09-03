@@ -31,12 +31,13 @@
   </head>
   <body ng-app="WhereItsApp" ng-controller="MainController">
 
-    <!-- Sidebars -->
-    <snap-drawer class="secondary-color">
-        <div ng-include="'templates/sidebar.html'"></div>
-    </snap-drawer>
-
     <div class="app">
+
+    <snap-drawers>
+        <snap-drawer class="secondary-color">
+            <div ng-include="'templates/sidebar.html'"></div>
+        </snap-drawer>
+
 
       <!-- Navbars -->
         <snap-content class="mainSnapContent">
@@ -64,6 +65,7 @@
               <!-- App Body -->
             <ng-view></ng-view>  
         </snap-content>
+    </snap-drawers>
 
     </div><!-- ~ .app -->
 

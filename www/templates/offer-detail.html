@@ -5,8 +5,9 @@
 <div class="app-body">
     <div class="app-content">
     	<section class="section container-fluid">
-    		<li class="list-group-item">
-				<h3 class="center-block text-center">{{selectedOffer.title}}</h3>
+    		<li class="list-group-item offer-heading">
+				<img class="offer-image" ng-src="{{selectedOffer.imageURL}}"/>
+				<h3 class="offer-title">{{selectedOffer.title}}</h3>
 			</li>
     		<li class="list-group-item">
 				<p class="lead">{{selectedOffer.description}}</p>

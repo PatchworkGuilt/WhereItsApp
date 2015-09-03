@@ -33,6 +33,7 @@ appControllers.controller('MyOffersController', function($scope, $http, $locatio
 		'rightButtonCallback': $scope.getOffers
 	});
 	$scope.offers = localStorageService.get('myOffers') || [];
+
 	$scope.getOffers = function() {
 		$scope.showSpinner = true;
 		$http.get(config.getBaseUrl() + "/offers/mine")
@@ -218,9 +219,18 @@ appControllers.controller("UserController", function($scope, $http, $location, c
 	}
 });
 
-appControllers.controller("SidebarController", function($scope, User){
+appControllers.controller("SidebarController", function($scope, $location, User, snapRemote){
 	$scope.isUserLoggedIn = User.isLoggedIn;
 	$scope.userDetails = User.getUserDetails;
+
+	$scope.navigateTo = function(url) {
+		snapRemote.close();
+		$location.path(url);
+	}
+
+	$scope.isOnPage = function(pageName) {
+		return $location.path().indexOf(pageName) >= 0;
+	}
 });
 
 appControllers.controller("OfferResponseController", function($scope, $http, $route, $routeParams, config, User){
