@@ -1,11 +1,11 @@
 <div class="text-center" ng-show="isUserLoggedIn()">
 	<div class="btn-group dropup">
-		<button type="button" class="btn btn-danger dropdown-toggle hateOffer" ng-click="toggleHatridDropdown()" data-toggle="dropdown">
+		<button type="button" class="btn btn-danger dropdown-toggle hateOffer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<i class="fa fa-ban"></i> 
 			Hate It <span class="caret">
 			<span class="sr-only">Toggle Dropdown</span>
 		</button>
-		<ul id="hate-it-options" class="dropdown-menu" ng-show="showDropdown">
+		<ul id="hate-it-options" class="dropdown-menu">
 			<li><a ng-click="respondToOffer('hate:block')">Block Venue Forever</a></li>
 			<li><a ng-click="respondToOffer('hate:timeout')">Put Venue In Timeout</a></li>
 			<li><a ng-click="respondToOffer('hate:inappropriate')">Report as Inappropriate</a></li>

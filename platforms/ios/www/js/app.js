@@ -1,14 +1,15 @@
 app = angular.module('WhereItsApp', [
   'ngRoute',
   'ngModal',
+  'ngTouch',
+  'snap',
   'LocalStorageModule',
-  'mobile-angular-ui',
   'WhereItsAppServices',
   'WhereItsAppControllers',
   'WhereItsAppDirectives'
 ]);
 
-app.config(function($routeProvider, $httpProvider, ngModalDefaultsProvider) {
+app.config(function($routeProvider, $httpProvider, ngModalDefaultsProvider, snapRemoteProvider) {
 	$routeProvider.when('/', {redirectTo: "/mine"});
 	$routeProvider.when('/login', {templateUrl:'templates/login-signup.html', controller: 'UserController'});
 	$routeProvider.when('/my-account', {templateUrl:'templates/account.html', controller: 'UserController'});
@@ -18,6 +19,8 @@ app.config(function($routeProvider, $httpProvider, ngModalDefaultsProvider) {
 	$routeProvider.when('/create', {templateUrl:'templates/offer-create.html',  controller: 'OfferCreationController'});
 
 	ngModalDefaultsProvider.set('closeButtonHtml', '<i class="fa fa-times"></i>')
+
+	snapRemoteProvider.globalOptions.disable = 'right';
 });
 
 app.run(function(User, $http){
@@ -28,11 +31,5 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
     // Now safe to use the Cordova API
-	if(StatusBar) {
-		alert("FOUND STATUSBAR");
-		StatusBar.overlaysWebView(false);
-	}
-	else {
-		alert("NO STATUSBAR");
-	}
+
 }

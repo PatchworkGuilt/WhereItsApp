@@ -5,10 +5,14 @@
 			<div class="scrollable">
 				<div class="scrollable-content">
 					<div class="list-group">
-						<a class="offer-item list-group-item" href="{{'#/offers/' + offer.id}}" ng-repeat="offer in offers">
-							<h4>{{offer.title}}</h4>
-							<hr />
+						<a class="offer-item list-group-item" ng-href="{{'#/offers/' + offer.id}}" ng-repeat="offer in offers">
 							<div class="row">
+								<div class="col-xs-12 offer-heading">
+    								<img class="offer-image" ng-src="{{offer.imageURL}}"/>
+									<h4 class="offer-title">{{offer.title}}</h4>
+								</div>
+							</div>
+							<div class="row offer-content">
 						        <div class="col-xs-8">
 									<address>
 										<strong>{{offer.venue}}</strong><br />

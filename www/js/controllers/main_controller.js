@@ -24,6 +24,7 @@ appControllers.controller("NavigationBarController", function($scope, NavBarServ
 appControllers.controller('MyOffersController', function($scope, $http, $location, NavBarService, config, User, localStorageService){
 	if (!User.isLoggedIn()) {
 		$location.path("/login");
+		return;
 	}
 	NavBarService.setState({
 		'text': "My Offers", 
@@ -32,6 +33,7 @@ appControllers.controller('MyOffersController', function($scope, $http, $locatio
 		'rightButtonCallback': $scope.getOffers
 	});
 	$scope.offers = localStorageService.get('myOffers') || [];
+
 	$scope.getOffers = function() {
 		$scope.showSpinner = true;
 		$http.get(config.getBaseUrl() + "/offers/mine")
@@ -121,13 +123,16 @@ appControllers.controller("OfferCreationController", function($scope, $http, $lo
 	$scope.calculateAudience();
 
 	$scope.onSubmit = function(){
+		$scope.showSpinner = true;
 		$http.post(config.getBaseUrl() + '/offers', $scope.newOffer)
 		.success(function(data){
 			$scope.newOffer = {};
+			$scope.showSpinner = false;
 			$location.path('/nearby');
 		})
 		.error(function(data, status){
 			$scope.errorMessage = data['message'];
+			$scope.showSpinner = false;
 		});
 	};
 });
@@ -162,15 +167,18 @@ appControllers.controller("UserController", function($scope, $http, $location, c
 
 	$scope.signup = function(){
 		newUser = $scope.newUser;
+		$scope.showSpinner = true;
 		if (isValidUser(newUser)) {
 			$http.post(config.getBaseUrl() + "/users", newUser)
 			.success(function(data){
 				User.login(data);
 				$scope.newUser = {};
+				$scope.showSpinner = false;
 				$location.path("/mine");
 			})
 			.error(function(data, status){
 				$scope.errorMessage = "User creation failed: " + data;
+				$scope.showSpinner = false;
 			})
 		}
 	}
@@ -180,46 +188,53 @@ appControllers.controller("UserController", function($scope, $http, $location, c
 		$scope.message = null;
 		$scope.errorMessage = null;
 		if (newUser.email && newUser.password) {
+			$scope.showSpinner = true;
 			$http.post(config.getBaseUrl() + "/login", newUser)
 			.success(function(data){
 				User.login(data);
 				$scope.newUser = {};
+				$scope.showSpinner = false;
 				$location.path("/mine");
 			})
 			.error(function(data, status){
 				$scope.errorMessage = "User login failed: " + data;
+				$scope.showSpinner = false;
 			})
 		}
 	}
 
 	$scope.logout = function(){
+		$scope.showSpinner = true;
 		$http.post(config.getBaseUrl() + "/logout")
 		.success(function(data){
 			User.logout();
+			$scope.showSpinner = false;
 			$location.path("/login");
 		})
 		.error(function(data, status){
 			$scope.errorMessage = "User logout failed: " + data;
+			$scope.showSpinner = false;
 			User.logout();
 		})
 	}
 });
 
-appControllers.controller("SidebarController", function($scope, User){
+appControllers.controller("SidebarController", function($scope, $location, User, snapRemote){
 	$scope.isUserLoggedIn = User.isLoggedIn;
 	$scope.userDetails = User.getUserDetails;
+
+	$scope.navigateTo = function(url) {
+		snapRemote.close();
+		$location.path(url);
+	}
+
+	$scope.isOnPage = function(pageName) {
+		return $location.path().indexOf(pageName) >= 0;
+	}
 });
 
 appControllers.controller("OfferResponseController", function($scope, $http, $route, $routeParams, config, User){
 	$scope.isUserLoggedIn = User.isLoggedIn;
-	$scope.showDropdown = false;
-
-	$scope.toggleHatridDropdown = function(){
-		if($scope.showDropdown)
-			$scope.showDropdown = false;
-		else
-			$scope.showDropdown = true;
-	}
 
 	$scope.respondToOffer = function(response) {
 		postData = {'response': response};

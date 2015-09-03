@@ -1,17 +1,19 @@
-<div class="navbar navbar-absolute-bottom">
+<div class="navbar navbar-fixed-bottom">
 	<div ng-include="'templates/offer-response-bar.html'"></div>
 </div>
 </div>
 <div class="app-body">
     <div class="app-content">
-    	<section class="section container-fluid list-group">
-    		<li class="list-group-item">
-				<h3 class="center-block text-center">{{selectedOffer.title}}</h3>
+    	<section class="section container-fluid">
+    		<li class="list-group-item offer-heading">
+				<img class="offer-image" ng-src="{{selectedOffer.imageURL}}"/>
+				<h3 class="offer-title">{{selectedOffer.title}}</h3>
 			</li>
     		<li class="list-group-item">
 				<p class="lead">{{selectedOffer.description}}</p>
 			</li>
-			<li class="list-group-item row">
+			<li class="list-group-item">
+				<div class="row">
 		        <div class="col-xs-8">
 					<address>
 						<strong>{{selectedOffer.venue}}</strong><br />
@@ -25,6 +27,7 @@
 		        </h4>
 		        <div class="col-xs-12 text-center">
 		        	<div class="btn btn-info directionsButton"><i class="fa fa-car"></i> Get Directions</div>
+		        </div>
 		        </div>
 	        </li>
 		</section>
