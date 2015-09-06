@@ -1,12 +1,9 @@
-<div class="navbar navbar-fixed-bottom">
-	<div ng-include="'templates/offer-response-bar.html'"></div>
-</div>
-</div>
 <div class="app-body">
     <div class="app-content">
     	<section class="section container-fluid">
-    		<li class="list-group-item">
-				<h3 class="center-block text-center">{{selectedOffer.title}}</h3>
+    		<li class="list-group-item offer-heading">
+				<img class="offer-image" ng-src="{{selectedOffer.imageURL}}"/>
+				<h3 class="offer-title">{{selectedOffer.title}}</h3>
 			</li>
     		<li class="list-group-item">
 				<p class="lead">{{selectedOffer.description}}</p>
@@ -19,11 +16,11 @@
 						1423 46th ave S.
 					</address>
 				</div>
-		        <h4 class="col-xs-4 text-center ">
+		        <div class="col-xs-4 text-center offer-badges">
 		        	<span class="label label-info label-as-badge">
 						<i class="fa fa-map-marker"></i> 4.2 mi
 					</span>
-		        </h4>
+		        </div>
 		        <div class="col-xs-12 text-center">
 		        	<div class="btn btn-info directionsButton"><i class="fa fa-car"></i> Get Directions</div>
 		        </div>
@@ -31,4 +28,7 @@
 	        </li>
 		</section>
 	</div>
+</div>
+<div class="navbar navbar-fixed-bottom">
+	<div ng-include="'templates/offer-response-bar.html'"></div>
 </div>

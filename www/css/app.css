@@ -116,8 +116,12 @@
 a.offer-item {
 	padding-top: 0px;
 	padding-bottom: 20px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	border-radius: 4px;
+}
+
+#offerResponseBar {
+	background-color: white;
 }
 
 #offerResponseBar .btn {
@@ -129,6 +133,7 @@ a.offer-item {
 	padding-right: 45px;
 	border-color: green;
 	font-weight: bold;
+	margin-bottom: 15px;
 }
 
 #offerResponseBar .declineOffer {
@@ -175,7 +180,10 @@ address {
 .label-as-badge {
 	border-radius: 1em;
 	display: inline-block;
-	margin: 5px;
+}
+
+.offer-badges {
+	font-size: 18px;
 }
 
 .loginMessage {
