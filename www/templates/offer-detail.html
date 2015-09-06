@@ -1,34 +1,35 @@
-<div class="app-body">
-    <div class="app-content">
-    	<section class="section container-fluid">
-    		<li class="list-group-item offer-heading">
-				<img class="offer-image" ng-src="{{selectedOffer.imageURL}}"/>
-				<h3 class="offer-title">{{selectedOffer.title}}</h3>
-			</li>
-    		<li class="list-group-item">
-				<p class="lead">{{selectedOffer.description}}</p>
-			</li>
-			<li class="list-group-item">
-				<div class="row">
-		        <div class="col-xs-8">
-					<address>
-						<strong>{{selectedOffer.venue}}</strong><br />
-						1423 46th ave S.
-					</address>
-				</div>
-		        <div class="col-xs-4 text-center offer-badges">
-		        	<span class="label label-info label-as-badge">
-						<i class="fa fa-map-marker"></i> 4.2 mi
-					</span>
-		        </div>
-		        <div class="col-xs-12 text-center">
-		        	<div class="btn btn-info directionsButton"><i class="fa fa-car"></i> Get Directions</div>
-		        </div>
-		        </div>
-	        </li>
-		</section>
+<loading-spinner></loading-spinner>
+<section class="container-fluid" ng-show="selectedOffer">
+	<li class="list-group-item offer-heading">
+		<img class="offer-image" ng-src="{{selectedOffer.imageURL}}"/>
+		<h3 class="offer-title">{{selectedOffer.title}}</h3>
+	</li>
+	<li class="list-group-item">
+		<p class="lead">{{selectedOffer.description}}</p>
+	</li>
+	<li class="list-group-item">
+		<div class="row">
+        <div class="col-xs-8">
+			<address>
+				<strong>{{selectedOffer.venue}}</strong><br />
+				1423 46th ave S.
+			</address>
+		</div>
+        <div class="col-xs-4 text-center offer-badges">
+        	<span class="label label-info label-as-badge">
+				<i class="fa fa-map-marker"></i> 4.2 mi
+			</span>
+        </div>
+        <div class="col-xs-12 text-center">
+        	<div class="btn btn-info directionsButton"><i class="fa fa-car"></i> Get Directions</div>
+        </div>
+        </div>
+    </li>
+	<modal-dialog show='selectedOffer.showOffer' dialog-title='{{selectedOffer.venue}}' width="95%" height="75%">
+  		<p>The Secret Passphrase is:</p>
+  		<table><tr><td class="lead bg-info secretPassphrase">Let the beer flow like wine.</td></tr></table> 
+	</modal-dialog>
+	<div class="navbar navbar-fixed-bottom" ng-show="selectedOffer">
+		<div ng-include="'templates/offer-response-bar.html'"></div>
 	</div>
-</div>
-<div class="navbar navbar-fixed-bottom">
-	<div ng-include="'templates/offer-response-bar.html'"></div>
-</div>
+</section>

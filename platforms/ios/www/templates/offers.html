@@ -1,38 +1,30 @@
-<div class="app-body">
-    <div class="app-content">
-    	<loading-spinner></loading-spinner>
-		<section class="section container-fluid">
-			<div class="scrollable">
-				<div class="scrollable-content">
-					<div class="list-group">
-						<a class="offer-item list-group-item" ng-href="{{'#/offers/' + offer.id}}" ng-repeat="offer in offers">
-							<div class="row">
-								<div class="col-xs-12 offer-heading">
-    								<img class="offer-image" ng-src="{{offer.imageURL}}"/>
-									<h4 class="offer-title">{{offer.title}}</h4>
-								</div>
-							</div>
-							<div class="row offer-content">
-						        <div class="col-xs-8">
-									<address>
-										<strong>{{offer.venue}}</strong><br />
-										1423 46th ave S.
-									</address>
-								</div>
-						        <div class="col-xs-4 text-center offer-badges">
-						        	<span class="label label-info label-as-badge">
-										<i class="fa fa-map-marker"></i> 4.2 mi
-									</span>
-									<br />
-									<span ng-show="offer.response" class="label" ng-class="'label-' + responseDisplayClassFragment(offer.response)" ng-controller="OfferResponseController">
-										<i class="fa" ng-class="responseDisplayIconClass(offer.response)"></i>
-									</span>
-						        </div>
-					        </div>
-						</a>
-					</div>
+<loading-spinner></loading-spinner>
+<section class="container-fluid">
+	<div class="list-group">
+		<a class="offer-item list-group-item" ng-href="{{'#/offers/' + offer.id}}" ng-repeat="offer in offers">
+			<div class="row">
+				<div class="col-xs-12 offer-heading">
+					<img class="offer-image" ng-src="{{offer.imageURL}}"/>
+					<h4 class="offer-title">{{offer.title}}</h4>
 				</div>
 			</div>
-		</section>
+			<div class="row offer-content">
+		        <div class="col-xs-8">
+					<address>
+						<strong>{{offer.venue}}</strong><br />
+						1423 46th ave S.
+					</address>
+				</div>
+		        <div class="col-xs-4 text-center offer-badges">
+		        	<span class="label label-info label-as-badge">
+						<i class="fa fa-map-marker"></i> 4.2 mi
+					</span>
+					<br />
+					<span ng-show="offer.response" class="label" ng-class="'label-' + responseDisplayClassFragment(offer.response)" ng-controller="OfferResponseController">
+						<i class="fa" ng-class="responseDisplayIconClass(offer.response)"></i>
+					</span>
+		        </div>
+	        </div>
+		</a>
 	</div>
-</div>
+</section>
