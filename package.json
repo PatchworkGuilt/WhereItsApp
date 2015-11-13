@@ -1,0 +1,36 @@
+{
+  "name": "whereitsapp",
+  "version": "1.0.0",
+  "description": "Receiving deals, discovering new venues.",
+  "main": "www/js/app.js",
+  "dependencies": {
+    "angular": "^1.4.7",
+    "grunt-cli": "^0.1.13"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4.7",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.15",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "phantomjs": "^1.9.18"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PatchworkGuilt/WhereItsApp.git"
+  },
+  "keywords": [
+    "deals",
+    "restaurants",
+    "bars"
+  ],
+  "author": "Scott Morse",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PatchworkGuilt/WhereItsApp/issues"
+  },
+  "homepage": "https://github.com/PatchworkGuilt/WhereItsApp#readme"
+}

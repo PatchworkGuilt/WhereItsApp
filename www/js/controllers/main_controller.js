@@ -27,8 +27,8 @@ appControllers.controller('MyOffersController', function($scope, $http, $locatio
 		return;
 	}
 	NavBarService.setState({
-		'text': "My Offers", 
-		'leftButton': NavBarService.ButtonTypes.MENU, 
+		'text': "My Offers",
+		'leftButton': NavBarService.ButtonTypes.MENU,
 		'rightButton': NavBarService.ButtonTypes.REFRESH,
 		'rightButtonCallback': $scope.getOffers
 	});
@@ -48,13 +48,13 @@ appControllers.controller('MyOffersController', function($scope, $http, $locatio
 		});
 	};
 	NavBarService.setState({
-		'text': "My Offers", 
-		'leftButton': NavBarService.ButtonTypes.MENU, 
+		'text': "My Offers",
+		'leftButton': NavBarService.ButtonTypes.MENU,
 		'rightButton': NavBarService.ButtonTypes.REFRESH,
 		'rightButtonCallback': $scope.getOffers
 	});
 	if (!$scope.offers.length) {
-		$scope.getOffers();	
+		$scope.getOffers();
 	}
 });
 
@@ -80,7 +80,7 @@ appControllers.controller('NearbyOffersController', function($scope, $http, NavB
 		'rightButtonCallback': $scope.getOffers
 	});
 	if (!$scope.offers.length) {
-		$scope.getOffers();	
+		$scope.getOffers();
 	}
 });
 
@@ -115,8 +115,6 @@ appControllers.controller("OfferCreationController", function($scope, $http, $lo
 			} else {
 				$scope.status = 'failed';
 			}
-
-
 		})
 		.error(function(data, status){
 			$scope.status = 'failed';
@@ -280,7 +278,7 @@ appControllers.controller("OfferResponseController", function($scope, $http, $ro
 		display = getDisplayByResponse(response)
 		return display['fragment'];
 	}
-	
+
 	$scope.responseDisplayIconClass = function(response) {
 		display = getDisplayByResponse(response)
 		return display['icon'];
