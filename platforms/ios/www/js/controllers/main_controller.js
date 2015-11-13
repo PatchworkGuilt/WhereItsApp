@@ -86,13 +86,16 @@ appControllers.controller('NearbyOffersController', function($scope, $http, NavB
 
 appControllers.controller("OfferDetailController", function($scope, $http, $routeParams, NavBarService, config){
 	NavBarService.setState({'text': "", 'leftButton': NavBarService.ButtonTypes.BACK});
+	$scope.showSpinner = true;
 	var offerId = $routeParams.offerId;
 	$http.get(config.getBaseUrl() + '/offers/' + offerId)
 	.success(function(data) {
 		$scope.selectedOffer = data;
+		$scope.showSpinner = false;
 	})
 	.error(function(data, status){
 		console.error(data);
+		$scope.showSpinner = false;
 	});
 });
 

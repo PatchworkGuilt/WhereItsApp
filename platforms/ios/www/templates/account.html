@@ -1,16 +1,10 @@
-<div class="app-body">
-	<div class="app-content">
-		<section class="section container-fluid">
-			<div class="scrollable">
-				<div class="bg-danger" ng-show="errorMessage">{{errorMessage}}</div>
-				<div class="bg-success" ng-show="message">{{message}}</div>
-				<div class="scrollable-content">
-					<div class="center-block text-center">
-						<p class="h4">Hello {{user.first_name}}</p>
-						<button ng-click="logout()" class="btn btn-lg btn-info">Log Out</button>
-					</div>
-				</div>
-			</div>
-		</section>
+<section class="container-fluid">
+	<div class="bg-danger" ng-show="errorMessage">{{errorMessage}}</div>
+	<div class="bg-success" ng-show="message">{{message}}</div>
+	<div class="scrollable-content">
+		<div class="center-block text-center">
+			<p class="h4">Hello {{user.first_name}}</p>
+			<button ng-click="logout()" class="btn btn-lg btn-info">Log Out</button>
+		</div>
 	</div>
-</div>	
+</section>

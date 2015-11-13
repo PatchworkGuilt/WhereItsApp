@@ -7,14 +7,10 @@
 			<br/>
 			<a ng-show="!showChangeResponse && selectedOffer.response == 'ACCEPT'" 
 				class="btn btn-success claimOfferButton"
-				ng-click="showOffer = true">
+				ng-click="selectedOffer.showOffer = true">
 				<i class="fa fa-map-marker"></i> Claim Offer
 			</a>
 		</p>
 	</div>
-	<modal-dialog show='showOffer' dialog-title='{{selectedOffer.venue}}' width="95%" height="75%">
-  		<p>The Secret Passphrase is:</p>
-  		<table><tr><td class="lead bg-info secretPassphrase">Let the beer flow like wine.</td></tr></table> 
-	</modal-dialog>
 	<div ng-show="!selectedOffer.response || showChangeResponse" ng-include="'templates/offer-response-buttons.html'"></div>
 </div>

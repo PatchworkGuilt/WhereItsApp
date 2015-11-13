@@ -1,65 +1,57 @@
-<div class="app-body">
-	<div class="app-content">
-		<loading-spinner></loading-spinner>
-		<section class="section container-fluid">
-			<div class="scrollable">
-				<div class="scrollable-content">
-					<div class="col-md-offset-3 col-md-6">
-						<div class="text-center">
-							<p class="h4 loginMessage">You must be logged in to claim and manage offers.</p>
-							<button ng-click="viewToShow='signup'" class="btn btn-lg btn-info">Sign Up</button>
-							<button ng-click="viewToShow='login'" class="btn btn-lg btn-default">Log In</button>
-						</div>
-						<div class="bg-danger" ng-show="errorMessage">{{errorMessage}}</div>
-						<div class="bg-success" ng-show="message">{{message}}</div>
-						<form ng-show="viewToShow=='signup'" ng-submit="signup()">
-							<div class="form-group">
-								<label for="venue">First Name</label>
-								<input class="form-control" ng-model="newUser.first_name" type="text" id="first_name" name="first_name">
-							</div>
-							<div class="form-group">
-								<label for="venue">Last Name</label>
-								<input class="form-control" ng-model="newUser.last_name" type="text" id="last_name" name="last_name">
-							</div>
-							<div class="form-group">
-								<label for="venue">Email</label>
-								<input class="form-control" ng-model="newUser.email" type="email" id="email" name="email">
-							</div>
-							<div class="form-group">
-								<label for="venue">Password</label>
-								<input class="form-control" ng-model="newUser.password" type="password" id="password" name="password">
-							</div>
-							<div class="form-group">
-								<label for="venue">Confirm Password</label>
-								<input class="form-control" ng-model="newUser.password2" type="password" id="password2" name="password2">
-							</div>
-							<div class="form-group">
-								<button type="submit" class="btn btn-info btn-block">Signup</button>
-							</div>
-						</form>
-
-						<form ng-show="viewToShow=='login'" ng-submit="login()">
-							<div class="form-group">
-								<label for="venue">Email</label>
-								<input class="form-control" ng-model="newUser.email" type="email" id="email" name="email">
-							</div>
-							<div class="form-group">
-								<label for="venue">Password</label>
-								<input class="form-control" ng-model="newUser.password" type="password" id="password" name="password">
-							</div>
-							<div class="form-group">
-								<button type="submit" class="btn btn-info btn-block">Login</button>
-							</div>
-						</form>
-
-			            <div class="environmentToggle">
-		              		<div ng-click="config.toggleEnv()" class="btn">
-			                	<span class="{{config.getDisplayClass()}}">{{config.getEnvName()}}</span>
-			              	</div>
-			            </div>
-					</div>
-				</div>
+<loading-spinner></loading-spinner>
+<section class="container-fluid">
+	<div class="col-md-offset-3 col-md-6">
+		<div class="text-center">
+			<p class="h4 loginMessage">You must be logged in to claim and manage offers.</p>
+			<button ng-click="viewToShow='signup'" class="btn btn-lg btn-info">Sign Up</button>
+			<button ng-click="viewToShow='login'" class="btn btn-lg btn-default">Log In</button>
+		</div>
+		<div class="bg-danger" ng-show="errorMessage">{{errorMessage}}</div>
+		<div class="bg-success" ng-show="message">{{message}}</div>
+		<form ng-show="viewToShow=='signup'" ng-submit="signup()">
+			<div class="form-group">
+				<label for="venue">First Name</label>
+				<input class="form-control" ng-model="newUser.first_name" type="text" id="first_name" name="first_name">
 			</div>
-		</section>
+			<div class="form-group">
+				<label for="venue">Last Name</label>
+				<input class="form-control" ng-model="newUser.last_name" type="text" id="last_name" name="last_name">
+			</div>
+			<div class="form-group">
+				<label for="venue">Email</label>
+				<input class="form-control" ng-model="newUser.email" type="email" id="email" name="email">
+			</div>
+			<div class="form-group">
+				<label for="venue">Password</label>
+				<input class="form-control" ng-model="newUser.password" type="password" id="password" name="password">
+			</div>
+			<div class="form-group">
+				<label for="venue">Confirm Password</label>
+				<input class="form-control" ng-model="newUser.password2" type="password" id="password2" name="password2">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-info btn-block">Signup</button>
+			</div>
+		</form>
+
+		<form ng-show="viewToShow=='login'" ng-submit="login()">
+			<div class="form-group">
+				<label for="venue">Email</label>
+				<input class="form-control" ng-model="newUser.email" type="email" id="email" name="email">
+			</div>
+			<div class="form-group">
+				<label for="venue">Password</label>
+				<input class="form-control" ng-model="newUser.password" type="password" id="password" name="password">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-info btn-block">Login</button>
+			</div>
+		</form>
+
+        <div class="environmentToggle">
+      		<div ng-click="config.toggleEnv()" class="btn">
+            	<span class="{{config.getDisplayClass()}}">{{config.getEnvName()}}</span>
+          	</div>
+        </div>
 	</div>
-</div>
+</section>
